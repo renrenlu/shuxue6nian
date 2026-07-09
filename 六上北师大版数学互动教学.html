@@ -1,0 +1,1821 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>六上数学互动教学方案</title>
+  <style>
+    :root {
+      --bg: #f6f7f4;
+      --panel: #ffffff;
+      --ink: #20231f;
+      --muted: #62675f;
+      --line: #dfe4da;
+      --green: #3d7b59;
+      --blue: #346a8c;
+      --amber: #b87924;
+      --red: #b84b42;
+      --soft-green: #e9f3ed;
+      --soft-blue: #e8f0f5;
+      --soft-amber: #fbf0df;
+      --shadow: 0 14px 40px rgba(36, 42, 31, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 18px;
+      overflow: auto;
+      border-right: 1px solid var(--line);
+      background: #fbfcf8;
+    }
+
+    .brand {
+      margin-bottom: 18px;
+    }
+
+    .brand h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-block {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #ecefe8;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      transition: width 180ms ease;
+    }
+
+    .nav-title {
+      margin: 18px 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 10px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .nav-button:hover,
+    .nav-button.active {
+      border-color: #cbd8cd;
+      background: var(--soft-green);
+    }
+
+    .nav-index {
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-copy {
+      min-width: 0;
+    }
+
+    .nav-copy strong,
+    .nav-copy span {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .nav-copy strong {
+      font-size: 14px;
+    }
+
+    .nav-copy span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .content {
+      min-width: 0;
+      padding: 22px clamp(16px, 3vw, 38px) 42px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .view-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow-x: auto;
+    }
+
+    .tab-button {
+      min-height: 36px;
+      padding: 7px 12px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      white-space: nowrap;
+      color: var(--muted);
+    }
+
+    .tab-button.active {
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .icon-button,
+    .text-button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+    }
+
+    .icon-button {
+      width: 38px;
+      display: grid;
+      place-items: center;
+    }
+
+    .text-button {
+      padding: 7px 12px;
+    }
+
+    .text-button.primary {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 760px;
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .metric {
+      min-height: 96px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .surface {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .surface-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcf8;
+    }
+
+    .surface-header h3 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    .surface-body {
+      padding: 16px;
+    }
+
+    .unit-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .unit-cover {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #eef1eb;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border: 1px solid #cfd9cd;
+      border-radius: 999px;
+      background: var(--soft-green);
+      color: #28553d;
+      font-size: 13px;
+    }
+
+    .lesson-list,
+    .check-list,
+    .plain-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .lesson-item,
+    .check-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fcfdf9;
+    }
+
+    .lesson-item input,
+    .check-item input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      accent-color: var(--green);
+    }
+
+    .lesson-item.done,
+    .check-item.done {
+      background: var(--soft-green);
+      color: #405044;
+    }
+
+    .lesson-item.done .task-title,
+    .check-item.done .task-title {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .task-title {
+      display: block;
+      font-weight: 700;
+    }
+
+    .task-detail {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .week-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .week-card.active {
+      border-color: var(--blue);
+      background: var(--soft-blue);
+    }
+
+    .week-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .week-card p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .week-card button {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--blue);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .flow-step {
+      min-height: 120px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .flow-step b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+      font-size: 15px;
+    }
+
+    .flow-step span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .note-area {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fcfdf9;
+      color: var(--ink);
+    }
+
+    .question-box {
+      display: grid;
+      gap: 10px;
+    }
+
+    .question {
+      padding: 12px;
+      border-left: 4px solid var(--amber);
+      background: var(--soft-amber);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .trainer {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .practice-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .practice-line:last-child {
+      border-bottom: 0;
+    }
+
+    .difficulty {
+      display: inline-flex;
+      gap: 3px;
+      color: var(--amber);
+      white-space: nowrap;
+    }
+
+    .flash-card {
+      display: grid;
+      gap: 14px;
+      place-items: center;
+      min-height: 230px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      text-align: center;
+    }
+
+    .flash-question {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .flash-answer {
+      min-height: 28px;
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .empty-answer {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .formula-card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      min-height: 220px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .formula-card.mastered {
+      background: var(--soft-green);
+      border-color: #bdd1c1;
+    }
+
+    .formula-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .formula-top h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+
+    .formula-top input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--green);
+    }
+
+    .formula-expression {
+      padding: 12px;
+      border: 1px solid #d7e0d5;
+      border-radius: 8px;
+      background: #fbfdf8;
+      color: #173f2b;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .formula-note {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .formula-note b {
+      color: var(--ink);
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 10;
+      max-width: 320px;
+      padding: 12px 14px;
+      border: 1px solid #cbd8cd;
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .print-only {
+      display: none;
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-list {
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      }
+
+      .metric-row,
+      .grid-two,
+      .diagnosis-grid,
+      .trainer {
+        grid-template-columns: 1fr;
+      }
+
+      .unit-layout {
+        grid-template-columns: 150px minmax(0, 1fr);
+      }
+
+      .flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar,
+      .section-head {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        justify-content: start;
+      }
+
+      .metric-row,
+      .unit-layout,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .unit-cover {
+        aspect-ratio: 16 / 10;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .sidebar,
+      .topbar,
+      .actions,
+      .toast {
+        display: none;
+      }
+
+      .app {
+        display: block;
+      }
+
+      .content {
+        padding: 0;
+      }
+
+      .panel {
+        display: block;
+        break-after: page;
+      }
+
+      .surface,
+      .metric,
+      .week-card,
+      .flow-step {
+        box-shadow: none;
+      }
+
+      .print-only {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>六上数学互动教学方案</h1>
+        <p>北师大版 · 5 周强化 · 本地保存进度</p>
+      </div>
+
+      <div class="progress-block" aria-live="polite">
+        <div class="progress-meta">
+          <span>完成进度</span>
+          <strong id="progressText">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div class="nav-title">单元导航</div>
+      <div class="nav-list" id="unitNav"></div>
+    </aside>
+
+    <main class="content">
+      <div class="topbar">
+        <div class="view-tabs" role="tablist" aria-label="视图">
+          <button class="tab-button active" data-panel="dashboard" type="button">总览</button>
+          <button class="tab-button" data-panel="diagnosis" type="button">诊断</button>
+          <button class="tab-button" data-panel="weeks" type="button">周计划</button>
+          <button class="tab-button" data-panel="unit" type="button">单元课</button>
+          <button class="tab-button" data-panel="formulas" type="button">公式</button>
+          <button class="tab-button" data-panel="practice" type="button">训练</button>
+          <button class="tab-button" data-panel="notes" type="button">记录</button>
+        </div>
+        <div class="actions">
+          <button class="icon-button" id="printBtn" type="button" title="打印">⎙</button>
+          <button class="icon-button" id="resetBtn" type="button" title="清空进度">↺</button>
+          <button class="text-button primary" id="nextActionBtn" type="button">下一项</button>
+        </div>
+      </div>
+
+      <section class="panel active" id="dashboard">
+        <div class="section-head">
+          <div>
+            <h2>教学工作台</h2>
+            <p>先补含义，再建模型，最后练计算。当前方案按 5 周完成设计，每天 2 小时，适合假期或集中补弱。</p>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric">
+            <span>完成周期</span>
+            <strong>5 周</strong>
+          </div>
+          <div class="metric">
+            <span>核心主线</span>
+            <strong>数量关系</strong>
+          </div>
+          <div class="metric">
+            <span>每日时长</span>
+            <strong>2 小时</strong>
+          </div>
+          <div class="metric">
+            <span>当前单元</span>
+            <strong id="currentUnitMetric">诊断与补弱</strong>
+          </div>
+        </div>
+
+        <div class="grid-two">
+          <div class="surface">
+            <div class="surface-header">
+              <h3>今天按这个顺序教</h3>
+            </div>
+            <div class="surface-body">
+              <div class="flow">
+                <div class="flow-step"><b>口算热身</b><span>15 分钟，只练本册高频基础。</span></div>
+                <div class="flow-step"><b>旧知复现</b><span>10 分钟，说出上节课学了什么和第一步做什么。</span></div>
+                <div class="flow-step"><b>情境理解</b><span>20 分钟，看图说已知量、问题、数量关系。</span></div>
+                <div class="flow-step"><b>建模讲解</b><span>30 分钟，用图、表格、线段图或关系式表达。</span></div>
+                <div class="flow-step"><b>教材练习</b><span>30 分钟，只做基础题和中档题。</span></div>
+                <div class="flow-step"><b>订正复盘</b><span>15 分钟，写错因和正确第一步。</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="surface">
+            <div class="surface-header">
+              <h3>保底目标</h3>
+            </div>
+            <div class="surface-body">
+              <ul class="check-list" id="minimumGoals"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="diagnosis">
+        <div class="section-head">
+          <div>
+            <h2>开课前诊断</h2>
+            <p>用 2 次课完成，不计入教材进度。诊断不是考试，是为了决定先补哪里。</p>
+          </div>
+        </div>
+        <div class="diagnosis-grid">
+          <div class="surface">
+            <div class="surface-header">
+              <h3>第 1 次：计算基础</h3>
+            </div>
+            <div class="surface-body">
+              <ul class="check-list" id="diagnosisMath"></ul>
+            </div>
+          </div>
+          <div class="surface">
+            <div class="surface-header">
+              <h3>第 2 次：理解基础</h3>
+            </div>
+            <div class="surface-body">
+              <ul class="check-list" id="diagnosisMeaning"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="weeks">
+        <div class="section-head">
+          <div>
+            <h2>5 周强化计划</h2>
+            <p>点击某一周会同步切换到对应单元。每天 2 小时，建议连续学习 35 天；每周完成后勾选。</p>
+          </div>
+        </div>
+        <div class="week-grid" id="weekGrid"></div>
+      </section>
+
+      <section class="panel" id="unit">
+        <div class="section-head">
+          <div>
+            <h2 id="unitTitle">单元课</h2>
+            <p id="unitIntro"></p>
+          </div>
+          <select id="unitSelect" aria-label="选择单元"></select>
+        </div>
+
+        <div class="grid-two">
+          <div class="surface">
+            <div class="surface-header">
+              <h3 id="unitFocusTitle">教学安排</h3>
+            </div>
+            <div class="surface-body">
+              <div class="unit-layout">
+                <img class="unit-cover" id="unitImage" src="" alt="">
+                <div>
+                  <div class="tag-row" id="unitTags"></div>
+                  <h3>前置知识</h3>
+                  <ul class="plain-list" id="unitPrereq"></ul>
+                  <h3>教学目标</h3>
+                  <ul class="plain-list" id="unitGoals"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="surface">
+            <div class="surface-header">
+              <h3>过关任务</h3>
+            </div>
+            <div class="surface-body">
+              <ul class="lesson-list" id="unitTasks"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-two" style="margin-top:18px">
+          <div class="surface">
+            <div class="surface-header">
+              <h3>补弱做法</h3>
+            </div>
+            <div class="surface-body">
+              <ul class="plain-list" id="unitSupport"></ul>
+            </div>
+          </div>
+          <div class="surface">
+            <div class="surface-header">
+              <h3>易错点</h3>
+            </div>
+            <div class="surface-body">
+              <ul class="plain-list" id="unitMistakes"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="formulas">
+        <div class="section-head">
+          <div>
+            <h2>公式模块</h2>
+            <p>按本册教材主线整理。教学时不要让孩子先死背，要求能说出公式里每个量代表什么，并能用图或生活情境解释。</p>
+          </div>
+        </div>
+        <div id="formulaModule"></div>
+      </section>
+
+      <section class="panel" id="practice">
+        <div class="section-head">
+          <div>
+            <h2>每日训练</h2>
+            <p>每天 20 分钟基础巩固，嵌入 2 小时学习时段。右侧闪卡用于分数、小数、百分数和比的快速互化。</p>
+          </div>
+        </div>
+        <div class="trainer">
+          <div class="surface">
+            <div class="surface-header">
+              <h3>训练清单</h3>
+            </div>
+            <div class="surface-body" id="practiceList"></div>
+          </div>
+          <div class="flash-card">
+            <div class="flash-question" id="flashQuestion">1/2</div>
+            <div class="flash-answer empty-answer" id="flashAnswer">点击显示答案</div>
+            <div class="actions">
+              <button class="text-button" id="showAnswerBtn" type="button">显示</button>
+              <button class="text-button primary" id="nextFlashBtn" type="button">下一题</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="notes">
+        <div class="section-head">
+          <div>
+            <h2>陪学记录</h2>
+            <p>记录诊断结论、错题类型和孩子当前卡点。内容保存在本机浏览器。</p>
+          </div>
+        </div>
+        <div class="grid-two">
+          <div class="surface">
+            <div class="surface-header">
+              <h3>家长提问话术</h3>
+            </div>
+            <div class="surface-body">
+              <div class="question-box" id="questionPrompts"></div>
+            </div>
+          </div>
+          <div class="surface">
+            <div class="surface-header">
+              <h3>本周记录</h3>
+            </div>
+            <div class="surface-body">
+              <textarea class="note-area" id="notesArea" placeholder="例如：本周单位 1 仍容易找错；分数除法计算能做，但解释不清为什么乘倒数。"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const stateKey = "mathGrade6TutorState.v2";
+
+    const units = [
+      {
+        id: "diagnosis",
+        label: "诊断",
+        title: "诊断与补弱",
+        weeks: "第 1 周 第 1-2 天",
+        image: "assets/page-005.png",
+        intro: "先确认分数、计算、读题和画图基础，不急着开新课。",
+        tags: ["分数意义", "约分通分", "读题"],
+        prereq: ["整数、小数四则运算", "分数意义", "简单统计表阅读"],
+        goals: ["判断孩子主要薄弱点", "建立画图解释分数的习惯", "决定是否先补 1 周分数基础"],
+        support: ["用图表示 3/4、2/5 的一半、12 的 1/3", "让孩子说清甲是乙的几分之几", "读题时圈已知量、问题和关键词"],
+        mistakes: ["只看计算分数，不看理解过程", "孩子不会画图时直接讲公式", "诊断后没有调整进度"],
+        tasks: ["完成计算基础诊断", "完成理解基础诊断", "确定第一单元前是否补分数"]
+      },
+      {
+        id: "fraction-division",
+        label: "一",
+        title: "第一单元 分数除法",
+        weeks: "第 1 周 第 3-7 天",
+        image: "assets/page-007.png",
+        intro: "用平均分和包含关系理解分数除法，再建立乘倒数规则。",
+        tags: ["分数除法", "倒数", "画图"],
+        prereq: ["分数意义、约分、通分", "分数乘法", "倒数的意义"],
+        goals: ["理解除以一个不为 0 的数等于乘它的倒数", "会做分数除以整数、整数除以分数、分数除以分数", "能解决一步分数除法应用题"],
+        support: ["用纸条或长方形图表示 4/5 平均分成 2 份、3 份", "先说每份是多少，再写算式", "每天 6 道基础计算并口述为什么乘倒数"],
+        mistakes: ["把被除数也倒过来", "忘记约分", "不理解除以 1/3 为什么结果变大"],
+        tasks: ["用图解释 4 ÷ 1/2 = 8", "10 道基础计算正确 8 道以上", "应用题先写数量关系再列式"]
+      },
+      {
+        id: "circle",
+        label: "二",
+        title: "第二单元 圆",
+        weeks: "第 2 周 第 1-3 天",
+        image: "assets/page-016.png",
+        intro: "通过测量和剪拼理解圆的特征、周长和面积。",
+        tags: ["圆", "周长", "面积"],
+        prereq: ["长方形、正方形面积", "周长和面积的区别", "小数乘法"],
+        goals: ["认识圆心、半径、直径", "理解圆周长与直径的关系", "会用圆周长和面积公式解决基础问题"],
+        support: ["用瓶盖、绳子、尺子测周长和直径", "先区分围一圈是周长、占多大是面积", "面积公式推导用剪拼图理解"],
+        mistakes: ["半径和直径混用", "周长公式和面积公式混淆", "漏写平方单位"],
+        tasks: ["看到直径能先求半径", "能判断题目求周长还是面积", "基础题正确率达到 80%"]
+      },
+      {
+        id: "letters",
+        label: "三",
+        title: "第三单元 用字母表示（二）",
+        weeks: "第 2 周 第 4 天",
+        image: "assets/unit3-038.png",
+        intro: "从规则和表格进入字母表达，先说清字母代表什么。",
+        tags: ["字母", "数量关系", "代入"],
+        prereq: ["四则运算意义", "单价 × 数量 = 总价", "速度 × 时间 = 路程"],
+        goals: ["会用字母表示数量和数量关系", "能把生活规则转成表达式", "会代入求值"],
+        support: ["从篮球得分、购物、年龄关系入手", "先写中文关系，再改成字母式", "每个字母都要说清代表什么"],
+        mistakes: ["不同量用了同一个字母", "只会算数字，不会表示关系", "代入时忘记运算顺序"],
+        tasks: ["用 a、b 表示两个不同量", "解释 2a + b 每一项的意思", "完成 5 道代入求值"]
+      },
+      {
+        id: "water",
+        label: "实践",
+        title: "综合实践 制订节水方案",
+        weeks: "第 2 周 第 5 天",
+        image: "assets/unit4_5-054.png",
+        intro: "用真实家庭用水记录练习调查、估算和方案表达。",
+        tags: ["调查", "估算", "方案"],
+        prereq: ["记录数据", "基础估算", "单位换算"],
+        goals: ["学会调查家庭用水现象", "能记录、估算、比较数据", "能提出可执行节水措施"],
+        support: ["连续记录 3 天刷牙、洗手、洗澡等情况", "允许次数 × 估计用水量", "最后写 5 条节水建议"],
+        mistakes: ["追求精确导致无法完成", "只写口号没有数据", "措施不可执行"],
+        tasks: ["完成 3 天记录", "估算每周可节约多少水", "写出 5 条可执行建议"]
+      },
+      {
+        id: "fraction-application",
+        label: "四",
+        title: "第四单元 分数的应用",
+        weeks: "第 3 周 第 1-4 天",
+        image: "assets/unit4_5-049.png",
+        intro: "全册关键单元。每题先找单位 1，再判断整体和部分。",
+        tags: ["单位 1", "线段图", "应用题"],
+        prereq: ["分数乘除法", "线段图", "谁是谁的几分之几"],
+        goals: ["会找单位 1", "会解决求一个数的几分之几和已知部分求整体", "能用方程或算术方法解决基础应用题"],
+        support: ["每题固定三问：单位 1 是谁、已知整体还是部分、要求整体还是部分", "必须画线段图再列式", "数量关系先写中文"],
+        mistakes: ["单位 1 找错", "看到分数就乘", "多步题不分层"],
+        tasks: ["10 道题正确找单位 1 达到 8 道", "解释为什么有的题乘、有的题除", "完成 4 道线段图应用题"]
+      },
+      {
+        id: "ratio",
+        label: "五",
+        title: "第五单元 比的认识",
+        weeks: "第 3 周 第 5-7 天",
+        image: "assets/unit5_6-062.png",
+        intro: "把比、除法、分数连起来，重点处理化简比和按比分配。",
+        tags: ["比", "比值", "化简"],
+        prereq: ["分数", "除法", "倍数关系", "约分"],
+        goals: ["理解比表示两个量之间的倍数关系", "会求比值、化简比", "会解决按比分配基础问题"],
+        support: ["把比写成 6 : 4 = 6 ÷ 4 = 6/4", "化简比先转成分数约分", "按比分配先画总份数"],
+        mistakes: ["比和比值混淆", "化简比后写成分数", "小数比、分数比不会化成整数比"],
+        tasks: ["说出前项、后项、比值", "把 0.7 : 0.8 化成 7 : 8", "完成 3 道按比分配"]
+      },
+      {
+        id: "position",
+        label: "六",
+        title: "第六单元 确定位置",
+        weeks: "第 4 周 第 1 天",
+        image: "assets/unit5_6-067.png",
+        intro: "用方向、角度、距离确定位置，重点是观测点和表达规范。",
+        tags: ["方向", "角度", "距离"],
+        prereq: ["东南西北", "角度基本认识", "量角器使用"],
+        goals: ["能用方向、角度、距离确定位置", "能根据描述在图上标位置", "能规范表达观测点"],
+        support: ["画家里平面图", "用量角器实际量角", "固定表达模板：以 A 为观测点，B 在 A 的某方向，距离多少"],
+        mistakes: ["观测点变了但方向没变", "东偏北和北偏东混淆", "漏写距离"],
+        tasks: ["完成 3 个位置描述", "根据描述标出 3 个点", "说清观测点是谁"]
+      },
+      {
+        id: "gobang",
+        label: "玩",
+        title: "数学好玩 五子棋",
+        weeks: "第 4 周 第 2 天",
+        image: "assets/unit6_game-072.png",
+        intro: "用棋局训练位置、方向和策略表达，作为阶段性放松课。",
+        tags: ["规则", "策略", "复盘"],
+        prereq: ["横、竖、斜方向", "基本规则", "位置表达"],
+        goals: ["能说明落子位置", "能发现对方威胁", "能复盘自己的策略"],
+        support: ["下棋后复盘 3 步", "说出为什么下这里", "指出对方下一步可能在哪里"],
+        mistakes: ["只玩不复盘", "不会表达方向", "没有观察对方连续棋子"],
+        tasks: ["完成 1 局五子棋", "复盘 3 个关键落子", "说出一次防守理由"]
+      },
+      {
+        id: "percent",
+        label: "七",
+        title: "第七单元 百分数的认识与应用（一）",
+        weeks: "第 4 周 第 3-7 天",
+        image: "assets/unit7_9-080.png",
+        intro: "百分数表示一个数是另一个数的百分之几，要和分数、比持续互通。",
+        tags: ["百分数", "百分率", "互化"],
+        prereq: ["分数小数互化", "比和比值", "分数应用"],
+        goals: ["理解百分数意义", "会进行分数、小数、百分数互化", "会解决简单百分率问题"],
+        support: ["每天做 10 个互化", "用命中率、出勤率、正确率解释百分数", "与比联系：84/100 = 84%"],
+        mistakes: ["百分数直接带单位", "小数点移动错误", "增加百分之几和增加到百分之几混淆"],
+        tasks: ["常见互化能脱口而出", "比较 18/20、8/10、21/25", "解释百分率的分母是谁"]
+      },
+      {
+        id: "objects",
+        label: "八",
+        title: "第八单元 观察物体（二）",
+        weeks: "第 5 周 第 1 天",
+        image: "assets/unit7_9-091.png",
+        intro: "必须用实物观察，先看再画，不直接做抽象想象题。",
+        tags: ["观察", "投影", "空间"],
+        prereq: ["长方体、正方体、圆柱、圆锥直观认识", "正面、侧面、上面"],
+        goals: ["能从不同方向观察物体", "能判断简单投影形状", "能用语言描述观察结果"],
+        support: ["用积木、杯子、纸模型、手电筒", "先看再画", "说从上面看像什么"],
+        mistakes: ["凭感觉猜", "不区分观察方向", "没有使用实物"],
+        tasks: ["观察 3 个实物", "画出上面、正面、侧面", "说明一个投影为什么这样"]
+      },
+      {
+        id: "data",
+        label: "九",
+        title: "第九单元 数据的表示和分析（三）",
+        weeks: "第 5 周 第 2 天",
+        image: "assets/unit7_9-096.png",
+        intro: "用真实数据练习收集、整理、比较和用数据支持结论。",
+        tags: ["数据", "统计", "结论"],
+        prereq: ["读表格", "平均数", "百分数基础"],
+        goals: ["能收集、整理、比较数据", "能选择合适数据支持结论", "能初步评价数据是否充分"],
+        support: ["用一周运动时间、睡眠时间、错题数量", "先读表再提问最多、最少、相差多少", "不急于画复杂统计图"],
+        mistakes: ["只看单个数据", "不理解平均会掩盖差异", "结论没有数据支撑"],
+        tasks: ["完成一份数据表", "用 3 句话说明结论", "指出数据是否足够"]
+      },
+      {
+        id: "nutrition",
+        label: "实践",
+        title: "综合实践 制订营养食谱",
+        weeks: "第 5 周 第 3 天",
+        image: "assets/practice_review-113.png",
+        intro: "记录一日三餐，用质量、比例和表格优化食谱。",
+        tags: ["食谱", "比例", "综合"],
+        prereq: ["质量单位", "表格整理", "百分数和估算"],
+        goals: ["记录一日三餐", "按类别整理食物", "结合数据提出改进方案"],
+        support: ["第 1 天记录真实食谱", "第 2 天按主食、蔬菜、肉蛋奶、水果分类", "第 3 天优化并说明依据"],
+        mistakes: ["只写菜名没有质量", "改进没有依据", "忽略成本和做法"],
+        tasks: ["完成一日食谱记录", "做食物分类表", "提出 3 条优化建议"]
+      },
+      {
+        id: "review",
+        label: "复习",
+        title: "总复习",
+        weeks: "第 5 周 第 4-7 天",
+        image: "assets/practice_review-108.png",
+        intro: "查漏补缺，不刷偏题。优先分数、比、百分数和单位 1。",
+        tags: ["复习", "错题", "巩固"],
+        prereq: ["全册基础", "错题本", "每日训练"],
+        goals: ["稳定基础计算", "减少同类错题", "能用图或表解释数量关系"],
+        support: ["只复习错题，不新增难题", "按错因分类：看题、列式、计算、单位", "每类补 2 道同类题"],
+        mistakes: ["最后阶段大量刷难题", "只改答案不改错因", "忽略概念解释"],
+        tasks: ["整理全册错题", "完成 1 次 30 分钟小测", "列出下阶段 3 个薄弱点"]
+      }
+    ];
+
+    const weeks = [
+      ["1", "诊断、分数基础、分数除法", "第 1-2 天诊断补弱；第 3-7 天完成分数除法。每天保留 20 分钟约分、通分、分数乘除。", "fraction-division"],
+      ["2", "圆、字母表示、节水实践", "第 1-3 天圆；第 4 天字母表示；第 5 天节水实践；第 6-7 天综合补漏。", "circle"],
+      ["3", "分数应用、比的认识", "第 1-4 天集中训练单位 1 和线段图；第 5-7 天学习比、化简比、按比分配。", "fraction-application"],
+      ["4", "确定位置、五子棋、百分数", "第 1 天位置；第 2 天五子棋；第 3-7 天百分数意义、互化和百分率。", "percent"],
+      ["5", "观察物体、数据分析、营养食谱、总复习", "第 1 天观察物体；第 2 天数据分析；第 3 天营养食谱；第 4-7 天总复习和错题清理。", "review"]
+    ];
+
+    const diagnosisMath = [
+      "整数、小数四则混合运算",
+      "约分、通分、分数加减乘",
+      "0.25、0.4、0.125、3/4、2/5 互化",
+      "米、厘米、千克、克、升、毫升换算"
+    ];
+
+    const diagnosisMeaning = [
+      "画图表示 3/4、2/5 的一半、12 的 1/3",
+      "说清甲是乙的几分之几",
+      "读题圈出已知量、问题、关键词",
+      "看简单统计表说出最大、最小、相差、平均"
+    ];
+
+    const minimumGoals = [
+      "分数除法基础计算",
+      "找单位 1 并画线段图",
+      "圆的周长和面积基础公式",
+      "比、分数、除法三者互通",
+      "常见百分数互化",
+      "会读表格并用数据说结论"
+    ];
+
+    const practiceItems = [
+      ["约分 4 题", "只用基础分数，要求过程稳定。", 1],
+      ["分数乘除 4 题", "每题先判断是否需要倒数。", 2],
+      ["一道分数应用小题", "圈单位 1，写数量关系。", 3],
+      ["分数、小数、百分数互化 5 题", "优先 1/2、1/4、3/4、1/5、2/5。", 2],
+      ["比、分数、除法互化 3 题", "例如 6 : 4 = 6 ÷ 4 = 6/4。", 2],
+      ["错题复盘 1 题", "写错因、正确第一步、同类题 1 道。", 1]
+    ];
+
+    const formulaGroups = [
+      {
+        group: "分数除法与分数应用",
+        formulas: [
+          {
+            name: "倒数",
+            expression: "a/b 的倒数 = b/a",
+            note: "a、b 都不为 0。求倒数就是分子分母交换位置。",
+            example: "3/5 的倒数是 5/3。"
+          },
+          {
+            name: "分数除法",
+            expression: "A ÷ B = A × 1/B",
+            note: "B 不能为 0。除以一个数，等于乘这个数的倒数。",
+            example: "4 ÷ 1/2 = 4 × 2 = 8。"
+          },
+          {
+            name: "求一个数是另一个数的几分之几",
+            expression: "比较量 ÷ 单位 1 = 分率",
+            note: "先判断谁是单位 1，再用比较量除以单位 1。",
+            example: "8 人是 12 人的 8 ÷ 12 = 2/3。"
+          },
+          {
+            name: "求部分量",
+            expression: "部分量 = 单位 1 × 分率",
+            note: "已知整体和分率，用乘法。",
+            example: "12 人的 1/3 是 12 × 1/3 = 4 人。"
+          },
+          {
+            name: "已知部分求整体",
+            expression: "单位 1 = 部分量 ÷ 分率",
+            note: "已知一个数的几分之几是多少，求这个数，用除法。",
+            example: "4 人是全组的 1/3，全组是 4 ÷ 1/3 = 12 人。"
+          },
+          {
+            name: "多或少几分之几",
+            expression: "多/少的分率 = 相差量 ÷ 单位 1",
+            note: "关键是确认以谁作标准，标准量就是单位 1。",
+            example: "甲比乙多多少分率，要用差量 ÷ 乙。"
+          }
+        ]
+      },
+      {
+        group: "圆",
+        formulas: [
+          {
+            name: "直径和半径",
+            expression: "d = 2r，r = d ÷ 2",
+            note: "同一个圆里，直径是半径的 2 倍。",
+            example: "直径 10 cm，半径是 5 cm。"
+          },
+          {
+            name: "圆的周长",
+            expression: "C = πd = 2πr",
+            note: "周长是围圆一圈的长度。π 通常取 3.14。",
+            example: "r = 5 cm，C = 2 × 3.14 × 5 = 31.4 cm。"
+          },
+          {
+            name: "圆的面积",
+            expression: "S = πr²",
+            note: "面积单位要写平方单位，如 cm²、m²。",
+            example: "r = 5 cm，S = 3.14 × 5² = 78.5 cm²。"
+          },
+          {
+            name: "半圆周长",
+            expression: "C半圆 = πr + 2r",
+            note: "半圆周长包含半个圆周和一条直径，不能只算 πr。",
+            example: "r = 4 cm，半圆周长 = 3.14 × 4 + 8 = 20.56 cm。"
+          },
+          {
+            name: "半圆面积",
+            expression: "S半圆 = πr² ÷ 2",
+            note: "半圆面积是整圆面积的一半。",
+            example: "r = 4 cm，面积 = 3.14 × 16 ÷ 2 = 25.12 cm²。"
+          },
+          {
+            name: "圆环面积",
+            expression: "S圆环 = π(R² - r²)",
+            note: "R 是大圆半径，r 是小圆半径。作为拓展或综合题常见。",
+            example: "R = 5，r = 3，面积 = 3.14 × (25 - 9)。"
+          }
+        ]
+      },
+      {
+        group: "字母表示与常见数量关系",
+        formulas: [
+          {
+            name: "篮球得分规则",
+            expression: "得分 = 2a + b",
+            note: "a 表示投进球数，b 表示罚进球数。每个字母必须对应一个明确数量。",
+            example: "投进 3 球，罚进 2 球，得分 = 2 × 3 + 2 = 8。"
+          },
+          {
+            name: "总价关系",
+            expression: "总价 = 单价 × 数量",
+            note: "购物类问题常用，也可变形求单价或数量。",
+            example: "单价 6 元，买 5 个，总价 30 元。"
+          },
+          {
+            name: "路程关系",
+            expression: "路程 = 速度 × 时间",
+            note: "行程类题的基本数量关系。",
+            example: "每分钟 80 m，走 5 分钟，路程 400 m。"
+          },
+          {
+            name: "长方形周长与面积",
+            expression: "C = 2(a + b)，S = ab",
+            note: "圆面积推导、图形对比和复习题中常用。",
+            example: "长 6，宽 4，面积 24，周长 20。"
+          }
+        ]
+      },
+      {
+        group: "比",
+        formulas: [
+          {
+            name: "比、除法、分数的关系",
+            expression: "a : b = a ÷ b = a/b",
+            note: "b 不能为 0。比表示两个量之间的倍数关系。",
+            example: "6 : 4 = 6 ÷ 4 = 6/4 = 1.5。"
+          },
+          {
+            name: "比值",
+            expression: "比值 = 前项 ÷ 后项",
+            note: "比值是一个数，化简比仍写成比。",
+            example: "8 : 5 的比值是 8/5。"
+          },
+          {
+            name: "比的基本性质",
+            expression: "a : b = (a × m) : (b × m)",
+            note: "m 不能为 0。前项和后项同时乘或除以相同的数，比值不变。",
+            example: "0.7 : 0.8 = 7 : 8。"
+          },
+          {
+            name: "按比分配",
+            expression: "甲 = 总量 × a/(a+b)，乙 = 总量 × b/(a+b)",
+            note: "先求总份数，再按份数分配。",
+            example: "60 按 2 : 3 分，甲 = 60 × 2/5 = 24。"
+          }
+        ]
+      },
+      {
+        group: "百分数",
+        formulas: [
+          {
+            name: "百分数意义",
+            expression: "百分数 = 比较量 ÷ 单位 1 × 100%",
+            note: "百分数表示一个数是另一个数的百分之几。",
+            example: "18 ÷ 20 = 90%。"
+          },
+          {
+            name: "百分率通式",
+            expression: "百分率 = 符合条件的量 ÷ 总量 × 100%",
+            note: "命中率、正确率、出勤率、合格率都用这个结构。",
+            example: "做对 24 题，共 30 题，正确率 = 24 ÷ 30 × 100% = 80%。"
+          },
+          {
+            name: "求比较量",
+            expression: "比较量 = 单位 1 × 百分率",
+            note: "已知整体和百分率，求部分，用乘法。",
+            example: "200 的 15% 是 200 × 15% = 30。"
+          },
+          {
+            name: "已知比较量求单位 1",
+            expression: "单位 1 = 比较量 ÷ 百分率",
+            note: "已知部分和百分率，求整体，用除法。",
+            example: "30 是整体的 15%，整体 = 30 ÷ 15% = 200。"
+          },
+          {
+            name: "多或少百分之几",
+            expression: "多/少的百分率 = 相差量 ÷ 单位 1 × 100%",
+            note: "和分数应用一样，先找单位 1。",
+            example: "现价比原价降了多少百分比，要用降价额 ÷ 原价。"
+          }
+        ]
+      },
+      {
+        group: "确定位置与数据分析",
+        formulas: [
+          {
+            name: "确定位置表达",
+            expression: "位置 = 观测点 + 方向角 + 距离",
+            note: "三项缺一不可。先确定以谁为观测点。",
+            example: "象群在指挥部北偏东 30° 方向，距离 6000 m。"
+          },
+          {
+            name: "平均数",
+            expression: "平均数 = 总数量 ÷ 总份数",
+            note: "比较两组数据时常用，但要注意平均数可能掩盖差异。",
+            example: "5 天共运动 250 分钟，平均每天 50 分钟。"
+          },
+          {
+            name: "相差量",
+            expression: "相差量 = 较大数 - 较小数",
+            note: "读表比较时先判断谁大谁小。",
+            example: "55 kg 和 43 kg 相差 12 kg。"
+          },
+          {
+            name: "总量",
+            expression: "总量 = 各部分数量相加",
+            note: "统计表、食谱质量、节水估算都要先求总量。",
+            example: "主食 140 g，蔬菜 150 g，鸡翅 50 g，总量 340 g。"
+          }
+        ]
+      }
+    ];
+
+    const prompts = [
+      "题目问的是什么？",
+      "已知哪些量？",
+      "谁是单位 1？",
+      "能不能画图表示？",
+      "这一步算出来的量叫什么？"
+    ];
+
+    const flashCards = [
+      ["1/2", "0.5 = 50%"],
+      ["1/4", "0.25 = 25%"],
+      ["3/4", "0.75 = 75%"],
+      ["1/5", "0.2 = 20%"],
+      ["2/5", "0.4 = 40%"],
+      ["1/8", "0.125 = 12.5%"],
+      ["0.08", "8% = 2/25"],
+      ["0.7 : 0.8", "7 : 8"],
+      ["18/20", "90%"],
+      ["21/25", "84%"]
+    ];
+
+    const defaultState = {
+      activeUnit: "diagnosis",
+      checks: {},
+      notes: "",
+      flashIndex: 0,
+      answerVisible: false
+    };
+
+    let state = loadState();
+    let eventsBound = false;
+
+    function loadState() {
+      try {
+        return { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || "{}") };
+      } catch {
+        return { ...defaultState };
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(stateKey, JSON.stringify(state));
+      updateProgress();
+    }
+
+    function keyFor(group, value) {
+      return `${group}:${value}`;
+    }
+
+    function isChecked(group, value) {
+      return Boolean(state.checks[keyFor(group, value)]);
+    }
+
+    function setChecked(group, value, checked) {
+      state.checks[keyFor(group, value)] = checked;
+      saveState();
+    }
+
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function makeCheckItem(group, value, title, detail) {
+      const li = el("li", "check-item");
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.checked = isChecked(group, value);
+      const copy = el("div");
+      const strong = el("span", "task-title", title);
+      copy.appendChild(strong);
+      if (detail) copy.appendChild(el("span", "task-detail", detail));
+      li.append(input, copy);
+      li.classList.toggle("done", input.checked);
+      input.addEventListener("change", () => {
+        setChecked(group, value, input.checked);
+        li.classList.toggle("done", input.checked);
+      });
+      return li;
+    }
+
+    function renderUnitNav() {
+      const nav = document.getElementById("unitNav");
+      nav.innerHTML = "";
+      units.forEach((unit) => {
+        const btn = el("button", "nav-button");
+        btn.type = "button";
+        btn.dataset.unit = unit.id;
+        btn.innerHTML = `<span class="nav-index">${unit.label}</span><span class="nav-copy"><strong>${unit.title}</strong><span>${unit.weeks}</span></span>`;
+        btn.addEventListener("click", () => {
+          setActiveUnit(unit.id);
+          setPanel("unit");
+        });
+        nav.appendChild(btn);
+      });
+    }
+
+    function renderChecks() {
+      const goalList = document.getElementById("minimumGoals");
+      goalList.innerHTML = "";
+      minimumGoals.forEach((item) => goalList.appendChild(makeCheckItem("minimum", item, item)));
+
+      const mathList = document.getElementById("diagnosisMath");
+      mathList.innerHTML = "";
+      diagnosisMath.forEach((item) => mathList.appendChild(makeCheckItem("diagnosisMath", item, item)));
+
+      const meaningList = document.getElementById("diagnosisMeaning");
+      meaningList.innerHTML = "";
+      diagnosisMeaning.forEach((item) => meaningList.appendChild(makeCheckItem("diagnosisMeaning", item, item)));
+    }
+
+    function renderWeeks() {
+      const grid = document.getElementById("weekGrid");
+      grid.innerHTML = "";
+      weeks.forEach(([week, title, focus, unitId]) => {
+        const card = el("div", "week-card");
+        if (state.activeUnit === unitId) card.classList.add("active");
+        const checkbox = makeCheckItem("week", week, `第 ${week} 周完成`, focus);
+        const h = el("h3", "", `第 ${week} 周 · ${title}`);
+        const p = el("p", "", focus);
+        const btn = el("button", "", "查看单元");
+        btn.type = "button";
+        btn.addEventListener("click", () => {
+          setActiveUnit(unitId);
+          setPanel("unit");
+        });
+        card.append(h, p, checkbox, btn);
+        grid.appendChild(card);
+      });
+    }
+
+    function renderUnitSelect() {
+      const select = document.getElementById("unitSelect");
+      select.innerHTML = "";
+      units.forEach((unit) => {
+        const option = document.createElement("option");
+        option.value = unit.id;
+        option.textContent = `${unit.label} · ${unit.title}`;
+        select.appendChild(option);
+      });
+      select.addEventListener("change", () => setActiveUnit(select.value));
+    }
+
+    function setActiveUnit(unitId) {
+      state.activeUnit = unitId;
+      saveState();
+      renderActiveUnit();
+      renderWeeks();
+      document.querySelectorAll(".nav-button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.unit === unitId);
+      });
+    }
+
+    function renderActiveUnit() {
+      const unit = units.find((item) => item.id === state.activeUnit) || units[0];
+      document.getElementById("unitSelect").value = unit.id;
+      document.getElementById("unitTitle").textContent = unit.title;
+      document.getElementById("unitIntro").textContent = unit.intro;
+      document.getElementById("currentUnitMetric").textContent = unit.title.replace(/^第.+?单元\s*/, "");
+      document.getElementById("unitFocusTitle").textContent = `${unit.weeks} · 教学安排`;
+      const image = document.getElementById("unitImage");
+      image.src = unit.image;
+      image.alt = unit.title;
+
+      const tags = document.getElementById("unitTags");
+      tags.innerHTML = "";
+      unit.tags.forEach((tag) => tags.appendChild(el("span", "tag", tag)));
+
+      fillList("unitPrereq", unit.prereq);
+      fillList("unitGoals", unit.goals);
+      fillList("unitSupport", unit.support);
+      fillList("unitMistakes", unit.mistakes);
+
+      const tasks = document.getElementById("unitTasks");
+      tasks.innerHTML = "";
+      unit.tasks.forEach((task) => tasks.appendChild(makeCheckItem(`unit-${unit.id}`, task, task)));
+
+      document.querySelectorAll(".nav-button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.unit === unit.id);
+      });
+    }
+
+    function fillList(id, items) {
+      const list = document.getElementById(id);
+      list.innerHTML = "";
+      items.forEach((item) => {
+        const li = el("li", "practice-line");
+        li.append(el("span", "", item));
+        list.appendChild(li);
+      });
+    }
+
+    function renderPractice() {
+      const root = document.getElementById("practiceList");
+      root.innerHTML = "";
+      practiceItems.forEach(([title, detail, level]) => {
+        const row = el("div", "practice-line");
+        const copy = el("div");
+        copy.append(el("span", "task-title", title), el("span", "task-detail", detail));
+        const difficulty = el("span", "difficulty", "★".repeat(level));
+        row.append(copy, difficulty);
+        root.appendChild(row);
+      });
+      renderFlash();
+    }
+
+    function renderFormulas() {
+      const root = document.getElementById("formulaModule");
+      root.innerHTML = "";
+      formulaGroups.forEach((group) => {
+        const section = el("div", "surface");
+        section.style.marginBottom = "18px";
+        const header = el("div", "surface-header");
+        header.appendChild(el("h3", "", group.group));
+        const body = el("div", "surface-body");
+        const grid = el("div", "formula-grid");
+
+        group.formulas.forEach((formula) => {
+          const value = `${group.group}:${formula.name}`;
+          const card = el("article", "formula-card");
+          const top = el("div", "formula-top");
+          const title = el("h3", "", formula.name);
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.title = "已掌握";
+          checkbox.checked = isChecked("formula", value);
+          card.classList.toggle("mastered", checkbox.checked);
+          checkbox.addEventListener("change", () => {
+            setChecked("formula", value, checkbox.checked);
+            card.classList.toggle("mastered", checkbox.checked);
+          });
+          top.append(title, checkbox);
+
+          const expression = el("div", "formula-expression", formula.expression);
+          const note = el("div", "formula-note");
+          const meaning = el("span");
+          meaning.innerHTML = `<b>含义：</b>${formula.note}`;
+          const example = el("span");
+          example.innerHTML = `<b>例子：</b>${formula.example}`;
+          note.append(meaning, example);
+
+          card.append(top, expression, note);
+          grid.appendChild(card);
+        });
+
+        body.appendChild(grid);
+        section.append(header, body);
+        root.appendChild(section);
+      });
+    }
+
+    function renderPrompts() {
+      const root = document.getElementById("questionPrompts");
+      root.innerHTML = "";
+      prompts.forEach((prompt, index) => {
+        root.appendChild(el("div", "question", `${index + 1}. ${prompt}`));
+      });
+      const notes = document.getElementById("notesArea");
+      notes.value = state.notes || "";
+      notes.addEventListener("input", () => {
+        state.notes = notes.value;
+        saveState();
+      });
+    }
+
+    function renderFlash() {
+      const [question, answer] = flashCards[state.flashIndex % flashCards.length];
+      document.getElementById("flashQuestion").textContent = question;
+      const answerNode = document.getElementById("flashAnswer");
+      answerNode.textContent = state.answerVisible ? answer : "点击显示答案";
+      answerNode.classList.toggle("empty-answer", !state.answerVisible);
+    }
+
+    function setPanel(panelId) {
+      document.querySelectorAll(".panel").forEach((panel) => {
+        panel.classList.toggle("active", panel.id === panelId);
+      });
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.panel === panelId);
+      });
+    }
+
+    function updateProgress() {
+      const total =
+        minimumGoals.length +
+        diagnosisMath.length +
+        diagnosisMeaning.length +
+        weeks.length +
+        formulaGroups.reduce((sum, group) => sum + group.formulas.length, 0) +
+        units.reduce((sum, unit) => sum + unit.tasks.length, 0);
+      const done = Object.entries(state.checks).filter(([, checked]) => checked).length;
+      const percent = total ? Math.round((done / total) * 100) : 0;
+      document.getElementById("progressText").textContent = `${percent}%`;
+      document.getElementById("progressBar").style.width = `${percent}%`;
+    }
+
+    function nextAction() {
+      const currentIndex = units.findIndex((unit) => unit.id === state.activeUnit);
+      const next = units[(currentIndex + 1) % units.length];
+      setActiveUnit(next.id);
+      setPanel("unit");
+      showToast(`已切换到：${next.title}`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function bindEvents() {
+      if (eventsBound) return;
+      eventsBound = true;
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        button.addEventListener("click", () => setPanel(button.dataset.panel));
+      });
+      document.getElementById("printBtn").addEventListener("click", () => window.print());
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        if (!confirm("确认清空所有勾选和记录？")) return;
+        state = { ...defaultState, checks: {}, notes: "" };
+        saveState();
+        init();
+        showToast("已清空进度");
+      });
+      document.getElementById("nextActionBtn").addEventListener("click", nextAction);
+      document.getElementById("showAnswerBtn").addEventListener("click", () => {
+        state.answerVisible = true;
+        saveState();
+        renderFlash();
+      });
+      document.getElementById("nextFlashBtn").addEventListener("click", () => {
+        state.flashIndex = (state.flashIndex + 1) % flashCards.length;
+        state.answerVisible = false;
+        saveState();
+        renderFlash();
+      });
+    }
+
+    function init() {
+      renderUnitNav();
+      renderChecks();
+      renderWeeks();
+      renderUnitSelect();
+      renderPractice();
+      renderFormulas();
+      renderPrompts();
+      bindEvents();
+      renderActiveUnit();
+      updateProgress();
+    }
+
+    init();
+  </script>
+</body>
+</html>
