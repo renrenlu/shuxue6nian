@@ -462,7 +462,7 @@
 
     .flow {
       display: grid;
-      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
     }
 
@@ -637,6 +637,269 @@
       color: var(--ink);
     }
 
+    .learning-surface,
+    .unit-formula-surface {
+      margin-top: 18px;
+    }
+
+    .lesson-counter {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .learning-route {
+      display: grid;
+      grid-template-columns: minmax(190px, 230px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .lesson-picker {
+      display: grid;
+      gap: 7px;
+    }
+
+    .lesson-pick {
+      width: 100%;
+      min-height: 54px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fcfdf9;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .lesson-pick:hover,
+    .lesson-pick.active {
+      border-color: var(--blue);
+      background: var(--soft-blue);
+    }
+
+    .lesson-pick.done {
+      border-color: #bdd1c1;
+      background: var(--soft-green);
+    }
+
+    .lesson-pick span,
+    .lesson-pick strong {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .lesson-pick span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .lesson-pick strong {
+      margin-top: 2px;
+      font-size: 14px;
+    }
+
+    .lesson-stage {
+      min-width: 0;
+    }
+
+    .lesson-stage-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lesson-stage-head h3 {
+      margin: 3px 0 0;
+      font-size: 21px;
+      line-height: 1.3;
+    }
+
+    .lesson-day,
+    .formula-level {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .lesson-day {
+      color: #28553d;
+      background: var(--soft-green);
+    }
+
+    .formula-level.must {
+      color: #7b4111;
+      background: var(--soft-amber);
+    }
+
+    .formula-level.use {
+      color: #28506b;
+      background: var(--soft-blue);
+    }
+
+    .formula-level.extend {
+      color: var(--muted);
+      background: #ecefe8;
+    }
+
+    .lesson-outcome {
+      margin: 14px 0;
+      padding: 10px 12px;
+      border-left: 4px solid var(--green);
+      background: var(--soft-green);
+    }
+
+    .lesson-outcome b {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .learn-steps {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: learn-step;
+    }
+
+    .learn-step {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 9px;
+      align-items: start;
+    }
+
+    .learn-step::before {
+      counter-increment: learn-step;
+      content: counter(learn-step);
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .lesson-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .lesson-detail {
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .lesson-detail b {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .lesson-formulas {
+      display: grid;
+      gap: 9px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .formula-mini {
+      display: grid;
+      grid-template-columns: minmax(110px, 0.45fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .formula-mini:last-child {
+      border-bottom: 0;
+    }
+
+    .formula-mini-name {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      font-weight: 700;
+    }
+
+    .formula-mini-expression {
+      color: #173f2b;
+      font-size: 18px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .formula-memory {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .lesson-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .lesson-footer .lesson-list {
+      flex: 1 1 280px;
+    }
+
+    .formula-guide {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .formula-guide-item {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .formula-guide-item h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .formula-guide-item p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .must-summary {
+      margin-bottom: 18px;
+      border-left: 4px solid var(--amber);
+    }
+
+    .must-summary .surface-header {
+      background: var(--soft-amber);
+    }
+
     .toast {
       position: fixed;
       right: 18px;
@@ -682,8 +945,13 @@
       .metric-row,
       .grid-two,
       .diagnosis-grid,
-      .trainer {
+      .trainer,
+      .learning-route {
         grid-template-columns: 1fr;
+      }
+
+      .lesson-picker {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       }
 
       .unit-layout {
@@ -696,6 +964,21 @@
     }
 
     @media (max-width: 620px) {
+      .sidebar {
+        padding: 14px 12px;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+
+      .nav-button {
+        min-width: 220px;
+      }
+
       .topbar,
       .section-head {
         display: grid;
@@ -708,7 +991,9 @@
 
       .metric-row,
       .unit-layout,
-      .flow {
+      .flow,
+      .lesson-detail-grid,
+      .formula-mini {
         grid-template-columns: 1fr;
       }
 
@@ -760,7 +1045,7 @@
     <aside class="sidebar">
       <div class="brand">
         <h1>六上数学互动教学方案</h1>
-        <p>北师大版 · 5 周强化 · 本地保存进度</p>
+        <p>北师大版 · 5 周强化 · 浏览器自动保存进度</p>
       </div>
 
       <div class="progress-block" aria-live="polite">
@@ -825,16 +1110,16 @@
         <div class="grid-two">
           <div class="surface">
             <div class="surface-header">
-              <h3>今天按这个顺序教</h3>
+              <h3>每天按这个顺序学会</h3>
             </div>
             <div class="surface-body">
               <div class="flow">
-                <div class="flow-step"><b>口算热身</b><span>15 分钟，只练本册高频基础。</span></div>
-                <div class="flow-step"><b>旧知复现</b><span>10 分钟，说出上节课学了什么和第一步做什么。</span></div>
-                <div class="flow-step"><b>情境理解</b><span>20 分钟，看图说已知量、问题、数量关系。</span></div>
-                <div class="flow-step"><b>建模讲解</b><span>30 分钟，用图、表格、线段图或关系式表达。</span></div>
-                <div class="flow-step"><b>教材练习</b><span>30 分钟，只做基础题和中档题。</span></div>
-                <div class="flow-step"><b>订正复盘</b><span>15 分钟，写错因和正确第一步。</span></div>
+                <div class="flow-step"><b>看懂题</b><span>15 分钟，圈已知量和问题，用自己的话复述。</span></div>
+                <div class="flow-step"><b>摆一摆或画一画</b><span>20 分钟，用实物、纸条、线段图或表格表示。</span></div>
+                <div class="flow-step"><b>说数量关系</b><span>20 分钟，先说谁和谁有关系，再写中文关系式。</span></div>
+                <div class="flow-step"><b>理解并记公式</b><span>15 分钟，说清字母、使用条件和记忆口令。</span></div>
+                <div class="flow-step"><b>由易到难练</b><span>35 分钟，先模仿 2 题，再独立做基础题。</span></div>
+                <div class="flow-step"><b>过关复盘</b><span>15 分钟，对照标准勾选，错题写正确第一步。</span></div>
               </div>
             </div>
           </div>
@@ -925,6 +1210,28 @@
           </div>
         </div>
 
+        <div class="surface learning-surface">
+          <div class="surface-header">
+            <h3>逐课学习路线</h3>
+            <span class="lesson-counter" id="unitLessonCounter"></span>
+          </div>
+          <div class="surface-body">
+            <div class="learning-route">
+              <div class="lesson-picker" id="lessonPicker"></div>
+              <article class="lesson-stage" id="lessonStage"></article>
+            </div>
+          </div>
+        </div>
+
+        <div class="surface unit-formula-surface">
+          <div class="surface-header">
+            <h3>本单元必背与必记</h3>
+          </div>
+          <div class="surface-body">
+            <div class="formula-guide" id="unitFormulaSummary"></div>
+          </div>
+        </div>
+
         <div class="grid-two" style="margin-top:18px">
           <div class="surface">
             <div class="surface-header">
@@ -949,7 +1256,7 @@
         <div class="section-head">
           <div>
             <h2>公式模块</h2>
-            <p>按本册教材主线整理。教学时不要让孩子先死背，要求能说出公式里每个量代表什么，并能用图或生活情境解释。</p>
+            <p>先理解，再背诵。标为“必背”的要能默写、说出使用条件，并用一道简单题验证；“会用”和“拓展”以理解和正确选择为主。</p>
           </div>
         </div>
         <div id="formulaModule"></div>
@@ -1086,6 +1393,20 @@
         tasks: ["完成 3 天记录", "估算每周可节约多少水", "写出 5 条可执行建议"]
       },
       {
+        id: "week2-review",
+        label: "巩固",
+        title: "第二周巩固与补漏",
+        weeks: "第 2 周 第 6-7 天",
+        image: "assets/unit3-038.png",
+        intro: "把圆、字母表示和节水实践串起来，用两次课完成回忆、应用、检测和补漏。",
+        tags: ["周复习", "公式回忆", "错题补漏"],
+        prereq: ["圆的周长和面积", "字母表示数量关系", "调查与估算"],
+        goals: ["能不看提示写出圆的核心公式", "能把生活规则写成关系式", "根据小测结果只补最薄弱的两类题"],
+        support: ["先口述再默写公式", "每道综合题先说求什么量", "错题按概念、列式、计算三类整理"],
+        mistakes: ["复习变成重复抄公式", "只看总分不看错因", "一次补太多难点"],
+        tasks: ["完成第二周知识图", "完成 30 分钟小测", "补做 4 道同类基础题"]
+      },
+      {
         id: "fraction-application",
         label: "四",
         title: "第四单元 分数的应用",
@@ -1212,6 +1533,389 @@
         tasks: ["整理全册错题", "完成 1 次 30 分钟小测", "列出下阶段 3 个薄弱点"]
       }
     ];
+
+    const lessonPlans = {
+      diagnosis: [
+        {
+          day: "第 1 周 第 1 天",
+          title: "计算基础诊断",
+          outcome: "找出计算卡点，不追求分数，只判断后面要从哪里补起。",
+          steps: ["独立完成 20 分钟小测，家长不提示。", "把错题按整数小数、约分通分、分数运算、单位换算分类。", "每类挑 1 题，让孩子口述每一步为什么这样算。", "只补错误最多的两类，各示范 1 题，再做 2 道同类题。"],
+          practice: "约分、通分、分数加减乘各 2 题，常用单位换算 4 题。",
+          pass: "同类补测 8 题至少对 6 题，并能指出自己最容易错的步骤。",
+          formulas: [],
+          memory: "必记方法：先看运算顺序，再约分；单位不同，先统一单位。"
+        },
+        {
+          day: "第 1 周 第 2 天",
+          title: "理解与读题诊断",
+          outcome: "确认孩子能不能把分数、数量关系和统计信息说出来、画出来。",
+          steps: ["用涂色图表示 3/4，再画出 2/5 的一半。", "拿 12 个小物件摆出 12 的 1/3，边摆边说。", "读一道应用题，圈已知量、框问题、画最简单的关系图。", "读一张小表格，说最大、最小、相差和大约平均。"],
+          practice: "2 道画图题、2 道单位 1 判断题、1 张四行数据表。",
+          pass: "不靠提示完成一次“读题-画图-说关系”，并确定下一阶段补弱重点。",
+          formulas: ["求一个数是另一个数的几分之几"],
+          memory: "必记问法：谁和谁比？以谁为标准？比较量 ÷ 标准量。"
+        }
+      ],
+      "fraction-division": [
+        {
+          day: "第 1 周 第 3 天",
+          title: "分数除以整数",
+          outcome: "从平均分理解分数除以整数，不靠背规则起步。",
+          steps: ["画一张表示 4/5 的长方形纸条。", "把 4/5 平均分成 2 份，涂出每一份。", "把图写成 4/5 ÷ 2，再改写成 4/5 × 1/2。", "换成除以 3，比较“分子直接除”和“乘 1/3”两种方法何时方便。"],
+          practice: "用图解释 2 题，再做分数除以整数基础计算 6 题。",
+          pass: "能说出“平均分成几份，就是乘几分之一”，6 题至少对 5 题。",
+          formulas: ["分数除法"],
+          memory: "背法：除以几，就乘几分之一。"
+        },
+        {
+          day: "第 1 周 第 4 天",
+          title: "整数除以分数",
+          outcome: "用“里面有几个”解释为什么除以真分数，结果可能变大。",
+          steps: ["摆 4 米纸带，每 1/2 米剪一段，数一共有几段。", "写出 4 ÷ 1/2 = 8，并把 1/2 换成 1/4 再摆一次。", "观察除数越小，能分出的份数越多。", "把“除以 1/2”改写成“乘 2”，说清 2 是 1/2 的倒数。"],
+          practice: "整数除以单位分数 4 题，整数除以一般分数 4 题。",
+          pass: "能用一句话解释 4 ÷ 1/2 为什么等于 8，8 题至少对 6 题。",
+          formulas: ["倒数", "分数除法"],
+          memory: "背法：除以谁，就乘谁的倒数；只把除数倒过来。"
+        },
+        {
+          day: "第 1 周 第 5 天",
+          title: "分数除以分数",
+          outcome: "稳定使用乘倒数法，并形成先变号、再倒数、后约分的顺序。",
+          steps: ["先估计结果比被除数大还是小。", "把除号改成乘号，同时只交换除数的分子分母。", "先约分再相乘，减少大数计算。", "用估计检查答案方向是否合理。"],
+          practice: "真分数、假分数、整数混合的基础计算 10 题。",
+          pass: "10 题至少对 8 题，且没有把被除数倒过来。",
+          formulas: ["倒数", "分数除法"],
+          memory: "三步口令：除变乘，除数倒，先约分。"
+        },
+        {
+          day: "第 1 周 第 6 天",
+          title: "分数除法应用题",
+          outcome: "把“每份”“包含几个”“谁是谁的几分之几”转成除法。",
+          steps: ["圈出题目要求的量和已知量。", "用小图或纸条表示平均分或包含关系。", "先写中文数量关系，再列除法算式。", "算完给结果补单位，并用乘法反查。"],
+          practice: "平均分、包含除、求分率三类各 2 题。",
+          pass: "6 题中至少 5 题先写对数量关系，计算正确至少 4 题。",
+          formulas: ["分数除法", "求一个数是另一个数的几分之几"],
+          memory: "看到“是几倍或几分之几”，用比较量 ÷ 标准量。"
+        },
+        {
+          day: "第 1 周 第 7 天",
+          title: "第一单元过关与补漏",
+          outcome: "检验计算、解释和应用三项能力，只补真正不会的类型。",
+          steps: ["闭卷默写分数除法规则和倒数条件。", "完成 10 分钟计算、10 分钟图示解释、10 分钟应用题。", "把错题标成规则错、倒数错、约分错或读题错。", "每个错因只补 2 道同类基础题并口述。"],
+          practice: "30 分钟单元小测，加错题同类练习不超过 8 题。",
+          pass: "总正确率达到 80%，并能完整解释一道分数除法题。",
+          formulas: ["倒数", "分数除法", "求一个数是另一个数的几分之几"],
+          memory: "过关要求：会默写、会解释、会选用，不只会套算式。"
+        }
+      ],
+      circle: [
+        {
+          day: "第 2 周 第 1 天",
+          title: "圆的特征与半径直径",
+          outcome: "通过画、折、量认识圆心、半径和直径。",
+          steps: ["找瓶盖、硬币和圆形杯口，观察圆为什么容易滚动。", "用圆规画圆，标出圆心 O、半径 r、直径 d。", "把纸圆对折两次，观察折痕都经过圆心。", "量同一个圆的几条半径和直径，归纳 d = 2r。"],
+          practice: "画 2 个指定半径的圆，完成半径直径互求 6 题。",
+          pass: "能准确指出圆心、半径、直径，并口算 d 与 r 的互求。",
+          formulas: ["直径和半径"],
+          memory: "背法：同圆中，直径是半径的 2 倍。"
+        },
+        {
+          day: "第 2 周 第 2 天",
+          title: "圆的周长",
+          outcome: "从实测中理解圆周长约是直径的 3.14 倍。",
+          steps: ["用绳子绕瓶盖一圈量周长，再量直径。", "计算周长 ÷ 直径，比较 3 个圆的结果。", "把共同的倍数关系记作 π，得到 C = πd。", "看到半径时先用 d = 2r，推得 C = 2πr。"],
+          practice: "已知直径、半径求周长各 3 题，半圆周长 2 题。",
+          pass: "能先判断给的是 r 还是 d，基础题 8 题至少对 6 题。",
+          formulas: ["直径和半径", "圆的周长", "半圆周长"],
+          memory: "背法：周长是一圈，C = πd = 2πr；半圆周长还要加直径。"
+        },
+        {
+          day: "第 2 周 第 3 天",
+          title: "圆的面积",
+          outcome: "用剪拼理解圆面积为什么是 πr²，并会区分周长和面积。",
+          steps: ["把纸圆分成若干等份，剪开后交错拼成近似长方形。", "观察长方形的长约是 πr，宽约是 r。", "用长 × 宽得到 S = πr²。", "每题先说“围一圈”还是“占多大”，再选周长或面积公式。"],
+          practice: "已知半径求面积 4 题，已知直径求面积 3 题，半圆面积 1 题。",
+          pass: "8 题至少对 6 题，面积单位全部写平方单位。",
+          formulas: ["直径和半径", "圆的面积", "半圆面积", "圆环面积"],
+          memory: "背法：面积看半径平方，S = πr²；圆环用大圆减小圆。"
+        }
+      ],
+      letters: [
+        {
+          day: "第 2 周 第 4 天",
+          title: "用字母表示数量关系",
+          outcome: "把生活规则从中文、表格转成含字母的式子。",
+          steps: ["用篮球得分表找出“每进 1 球得 2 分”的不变量。", "先说中文关系：得分 = 2 × 进球数 + 罚球分。", "用 a、b 替换两个变化的量，写成 2a + b。", "给 a、b 代入具体数，按运算顺序检验表达式。"],
+          practice: "篮球、购物、路程、长方形四个情境各写 1 个表达式并代入。",
+          pass: "能说清每个字母代表什么，4 个表达式至少写对 3 个。",
+          formulas: ["篮球得分规则", "总价关系", "路程关系", "长方形周长与面积"],
+          memory: "必记顺序：先写中文关系，再换成字母，最后代入检验。"
+        }
+      ],
+      water: [
+        {
+          day: "第 2 周 第 5 天",
+          title: "调查并制订节水方案",
+          outcome: "从真实记录得到节水量，用数据提出可执行方案。",
+          steps: ["确定刷牙、洗手、洗澡等 3 个调查项目。", "记录次数和每次估计用水量，算出原来总量。", "设计节水做法，再算节水后的总量和相差量。", "用“措施 + 每周节约量 + 执行人”写成方案。"],
+          practice: "完成一张三项目记录表，计算一天和一周可节约水量。",
+          pass: "方案至少有 3 条可执行措施，每条都有数据依据。",
+          formulas: ["总量", "相差量"],
+          memory: "必记模型：总量 = 每次用量 × 次数；节水量 = 原用量 - 现用量。"
+        }
+      ],
+      "week2-review": [
+        {
+          day: "第 2 周 第 6 天",
+          title: "圆与字母综合巩固",
+          outcome: "不看书回忆核心公式，并把公式放回真实问题中。",
+          steps: ["画一张圆的公式关系图，从 r 推到 d、C、S。", "每条公式说出每个字母的含义和单位。", "完成一道车轮周长题和一道圆形面积题。", "把其中一个计算过程改写成含字母的表达式。"],
+          practice: "圆基础题 6 题，字母表达与代入 4 题。",
+          pass: "核心公式默写全对，10 题至少对 8 题。",
+          formulas: ["直径和半径", "圆的周长", "圆的面积", "总价关系", "路程关系"],
+          memory: "回忆顺序：先 r 和 d，再周长 C，最后面积 S。"
+        },
+        {
+          day: "第 2 周 第 7 天",
+          title: "第二周小测与补漏",
+          outcome: "定位圆、字母或实践题中的具体卡点。",
+          steps: ["闭卷完成 30 分钟小测。", "给每道错题标记：选错公式、代入错、计算错、单位错。", "用一句话写出正确第一步。", "每类错题补 2 道，正确后停止。"],
+          practice: "小测含圆 60%、字母 25%、节水实践 15%。",
+          pass: "基础题正确率达到 80%，同一错因不连续出现两次。",
+          formulas: ["圆的周长", "圆的面积", "总价关系", "路程关系", "总量"],
+          memory: "检查口令：求什么、用哪个量、单位是什么。"
+        }
+      ],
+      "fraction-application": [
+        {
+          day: "第 3 周 第 1 天",
+          title: "求一个数的几分之几",
+          outcome: "识别单位 1，理解求部分量为什么用乘法。",
+          steps: ["圈出“谁的几分之几”，把“谁”标成单位 1。", "画一条线段表示单位 1，按分率分份并涂出部分。", "写中文关系：部分量 = 单位 1 × 分率。", "列式计算后检查部分量是否符合图中的大小关系。"],
+          practice: "找单位 1 共 6 题，求部分量基础题 4 题。",
+          pass: "10 题中单位 1 至少找对 8 题，4 道列式至少对 3 道。",
+          formulas: ["求部分量"],
+          memory: "背法：知道整体求部分，单位 1 × 分率。"
+        },
+        {
+          day: "第 3 周 第 2 天",
+          title: "已知部分求整体",
+          outcome: "根据已知的是部分、要求的是整体，判断用除法。",
+          steps: ["标出单位 1 未知，用一整条线段表示。", "把已知部分对准分率对应的线段。", "写关系：部分量 = 单位 1 × 分率。", "从关系式反推单位 1 = 部分量 ÷ 分率，并用乘法验算。"],
+          practice: "乘除对比题 8 题，要求每题先判断求部分还是求整体。",
+          pass: "8 题至少 6 题选对乘除法，并能解释选择理由。",
+          formulas: ["求部分量", "已知部分求整体"],
+          memory: "背法：知道部分求整体，部分量 ÷ 分率。"
+        },
+        {
+          day: "第 3 周 第 3 天",
+          title: "多步分数应用",
+          outcome: "用线段图分层处理“多或少几分之几”和连续变化。",
+          steps: ["先找比较标准，确定单位 1。", "把多出来或少掉的部分单独标在图上。", "每一步只求一个量，并在算式后写量的名称。", "回到问题检查是否还需要第二步。"],
+          practice: "多或少几分之几 4 题，两步应用题 3 题。",
+          pass: "7 题至少 5 题单位 1 和分步关系正确。",
+          formulas: ["求部分量", "已知部分求整体", "多或少几分之几"],
+          memory: "背法：多或少的分率 = 相差量 ÷ 标准量。"
+        },
+        {
+          day: "第 3 周 第 4 天",
+          title: "分数应用过关",
+          outcome: "把找单位 1、画图、写关系、列式变成固定习惯。",
+          steps: ["随机抽 6 题，只做圈单位 1 和画线段图。", "再完成 4 道完整计算题。", "逐题说明为什么乘或为什么除。", "把错题改成一道数字不同的同类题再做。"],
+          practice: "30 分钟小测，乘法题、除法题、多步题比例为 3:3:2。",
+          pass: "单位 1 判断达到 80%，完整题正确率达到 75%。",
+          formulas: ["求一个数是另一个数的几分之几", "求部分量", "已知部分求整体", "多或少几分之几"],
+          memory: "四问：单位 1 是谁？已知整体还是部分？求什么？乘还是除？"
+        }
+      ],
+      ratio: [
+        {
+          day: "第 3 周 第 5 天",
+          title: "比的意义与三者互通",
+          outcome: "理解比表示两个量的倍数关系，并和除法、分数连接。",
+          steps: ["用 6 个红块和 4 个蓝块说出红与蓝的比。", "把 6:4 写成 6 ÷ 4 和 6/4。", "交换比较顺序，观察 6:4 与 4:6 不同。", "说出前项、后项和比号，强调后项不能为 0。"],
+          practice: "看图写比 4 题，比、除法、分数互化 6 题。",
+          pass: "10 题至少对 8 题，能说清比较顺序。",
+          formulas: ["比、除法、分数的关系", "比值"],
+          memory: "背法：a:b = a÷b = a/b，后项不能为 0。"
+        },
+        {
+          day: "第 3 周 第 6 天",
+          title: "求比值与化简比",
+          outcome: "区分比值和最简整数比，掌握小数比、分数比的化简。",
+          steps: ["先用前项 ÷ 后项求比值，结果可以是数或分数。", "化简比时把比看成分数，用约分思想处理。", "小数比同时乘 10、100 变整数，分数比同乘公分母。", "最后检查化简比仍写成 a:b。"],
+          practice: "求比值 4 题，整数比、小数比、分数比化简各 3 题。",
+          pass: "13 题至少对 10 题，化简结果格式不混淆。",
+          formulas: ["比值", "比的基本性质"],
+          memory: "背法：前后项同乘或同除一个不为 0 的数，比值不变。"
+        },
+        {
+          day: "第 3 周 第 7 天",
+          title: "按比分配与第三周过关",
+          outcome: "把 a:b 看成 a+b 份，再按份数分配总量。",
+          steps: ["用 2:3 摆出 2 份和 3 份，先求总份数 5。", "求每一部分占总量的 2/5 和 3/5。", "用总量分别乘分率得到两部分。", "把两部分相加，检查是否回到总量。"],
+          practice: "按比分配基础题 5 题，加 20 分钟第三周小测。",
+          pass: "5 题至少对 4 题，且每题都完成“相加等于总量”的检查。",
+          formulas: ["比、除法、分数的关系", "按比分配"],
+          memory: "背法：先求总份数，再用总量 × 各自份数/总份数。"
+        }
+      ],
+      position: [
+        {
+          day: "第 4 周 第 1 天",
+          title: "用方向角和距离确定位置",
+          outcome: "从同一观测点出发，用方向、角度、距离准确描述位置。",
+          steps: ["在纸上画十字方向标，先确定观测点。", "用量角器从指定方向起始边量角。", "按比例量出距离并标点。", "用完整句式互相描述，再让对方按描述复原。"],
+          practice: "看图描述 3 题，根据描述标点 3 题。",
+          pass: "6 题至少对 5 题，表达中观测点、方向角、距离齐全。",
+          formulas: ["确定位置表达"],
+          memory: "必记模板：以 A 为观测点，B 在 A 的某方向角上，距离多少。"
+        }
+      ],
+      gobang: [
+        {
+          day: "第 4 周 第 2 天",
+          title: "五子棋策略表达",
+          outcome: "在游戏中练习横、竖、斜观察和有根据的策略表达。",
+          steps: ["先复述连成五子的规则和三种方向。", "每次落子前找自己的机会和对方的威胁。", "落子后说一句理由：进攻、连接或防守。", "结束后回放 3 个关键落子，找更好的选择。"],
+          practice: "完整下 1 局，每人至少口述 5 次落子理由。",
+          pass: "能指出一次进攻点和一次防守点，并复盘 3 步。",
+          formulas: [],
+          memory: "必记方法：先看对方是否四连，再看自己能否形成双向机会。"
+        }
+      ],
+      percent: [
+        {
+          day: "第 4 周 第 3 天",
+          title: "百分数的意义",
+          outcome: "把不同分母的分数统一到每 100 个，理解百分数是比较关系。",
+          steps: ["比较 18/20 和 8/10，发现分母不同不方便。", "分别化成 90/100 和 80/100。", "把 90/100 写成 90%，读作百分之九十。", "用进球率说明百分数比较的是两个量，不能直接表示具体数量。"],
+          practice: "从情境写百分数 4 题，判断百分数能否带单位 4 题。",
+          pass: "能用自己的话解释百分数，8 题至少对 6 题。",
+          formulas: ["百分数意义"],
+          memory: "背法：百分数表示一个数是另一个数的百分之几。"
+        },
+        {
+          day: "第 4 周 第 4 天",
+          title: "分数小数百分数互化",
+          outcome: "建立三种数的稳定转换路径，并熟记常见值。",
+          steps: ["百分数去掉百分号再除以 100，化成小数。", "小数乘 100% 化成百分数。", "分数先除成小数，再化百分数；能扩成分母 100 时优先扩分。", "用闪卡反复回忆 1/2、1/4、3/4、1/5、2/5、1/8。"],
+          practice: "三种互化各 6 题，常见值闪卡 2 轮。",
+          pass: "18 题至少对 15 题，6 个常见值能在 30 秒内回答。",
+          formulas: ["百分数意义"],
+          memory: "必背：1/2=50%，1/4=25%，3/4=75%，1/5=20%，2/5=40%，1/8=12.5%。"
+        },
+        {
+          day: "第 4 周 第 5 天",
+          title: "百分率问题",
+          outcome: "看清符合条件的量和总量，解决正确率、出勤率、命中率。",
+          steps: ["在题目中圈“符合条件的量”和“总量”。", "先写除法：符合条件的量 ÷ 总量。", "把商化成百分数。", "检查百分率是否符合生活常识，通常在 0% 到 100% 之间。"],
+          practice: "命中率、正确率、出勤率、合格率各 2 题。",
+          pass: "8 题至少对 6 题，分母全部选对。",
+          formulas: ["百分率通式"],
+          memory: "背法：百分率 = 符合条件的量 ÷ 总量 × 100%。"
+        },
+        {
+          day: "第 4 周 第 6 天",
+          title: "百分数应用",
+          outcome: "像分数应用一样，先找单位 1，再判断求部分还是求整体。",
+          steps: ["圈出百分率对应的单位 1。", "画线段图判断已知整体还是部分。", "求部分用乘法，已知部分求整体用除法。", "遇到多或少百分之几，用相差量除以标准量。"],
+          practice: "求部分、求整体、求增减率各 3 题。",
+          pass: "9 题至少对 7 题，并能说出每题的单位 1。",
+          formulas: ["求比较量", "已知比较量求单位 1", "多或少百分之几"],
+          memory: "背法：整体 × 百分率 = 部分；部分 ÷ 百分率 = 整体。"
+        },
+        {
+          day: "第 4 周 第 7 天",
+          title: "百分数过关与补漏",
+          outcome: "同时检查意义、互化、百分率和应用四个板块。",
+          steps: ["闭卷写出 6 个常见互化值。", "完成 10 分钟互化、10 分钟百分率、10 分钟应用题。", "按互化错、分母错、单位 1 错、计算错分类。", "每类只补 2 道并重新口述公式。"],
+          practice: "30 分钟第四周小测，加不超过 8 道补漏题。",
+          pass: "总正确率达到 80%，应用题单位 1 判断达到 80%。",
+          formulas: ["百分数意义", "百分率通式", "求比较量", "已知比较量求单位 1", "多或少百分之几"],
+          memory: "过关顺序：先确定比较关系，再选分母，最后计算百分数。"
+        }
+      ],
+      objects: [
+        {
+          day: "第 5 周 第 1 天",
+          title: "从不同方向观察物体",
+          outcome: "用实物建立正面、上面、侧面的投影，不凭感觉猜。",
+          steps: ["摆一个杯子、盒子或积木组合，固定正面标记。", "眼睛与观察面保持平视，只画看到的轮廓。", "依次换到上面和侧面，比较哪些边会重合或看不见。", "交换图和实物，让孩子按三视图找对应物体。"],
+          practice: "观察 3 个实物，每个画正面、上面、侧面。",
+          pass: "9 幅投影图至少画对 7 幅，并能说出观察方向。",
+          formulas: [],
+          memory: "必记方法：先定方向，只画看到的轮廓；被遮住的部分不凭空补。"
+        }
+      ],
+      data: [
+        {
+          day: "第 5 周 第 2 天",
+          title: "读表、比较并用数据说结论",
+          outcome: "从真实数据中找总量、平均、相差，并判断结论是否有依据。",
+          steps: ["先读标题、项目和单位，确认每一列表示什么。", "找最大、最小并计算相差量。", "需要公平比较时求平均数。", "用“结论 + 两个数据证据”写 3 句话。"],
+          practice: "整理一周运动或睡眠数据，完成 5 个读表问题。",
+          pass: "5 问至少对 4 问，结论中至少引用 2 个正确数据。",
+          formulas: ["平均数", "相差量", "总量"],
+          memory: "背法：平均数 = 总数量 ÷ 总份数；结论必须有数据证据。"
+        }
+      ],
+      nutrition: [
+        {
+          day: "第 5 周 第 3 天",
+          title: "用数据优化营养食谱",
+          outcome: "把一日三餐分类、求总量和占比，再提出有依据的调整。",
+          steps: ["记录一日三餐的食物名称和大致质量。", "按主食、蔬菜、肉蛋奶、水果分类求总量。", "计算各类占总量的大致百分比。", "用数据提出 3 条可执行调整，并兼顾成本和做法。"],
+          practice: "完成一张食谱分类表和一份优化后的菜单。",
+          pass: "每条调整都写明改什么、改多少、为什么。",
+          formulas: ["总量", "百分数意义"],
+          memory: "必记模型：某类占比 = 该类质量 ÷ 食物总质量 × 100%。"
+        }
+      ],
+      review: [
+        {
+          day: "第 5 周 第 4 天",
+          title: "总复习一：分数、应用与比",
+          outcome: "打通分数除法、单位 1、比和按比分配。",
+          steps: ["用一张图回忆分数除法和乘倒数。", "做乘法题、除法题各 3 道并说明单位 1。", "把同一组数写成比、除法和分数。", "完成 2 道按比分配，最后相加验总量。"],
+          practice: "计算 6 题、分数应用 4 题、比 4 题。",
+          pass: "14 题至少对 11 题，单位 1 和比的顺序无混淆。",
+          formulas: ["分数除法", "求部分量", "已知部分求整体", "比、除法、分数的关系", "按比分配"],
+          memory: "复习主线：比较量、标准量、分率三者始终对应。"
+        },
+        {
+          day: "第 5 周 第 5 天",
+          title: "总复习二：圆、位置与观察",
+          outcome: "区分长度、面积和位置描述，减少公式与单位错误。",
+          steps: ["闭卷默写 r、d、C、S 的关系。", "完成圆周长和面积对比题各 3 道。", "按方向角和距离互相描述 2 个位置。", "用实物快速判断 3 个观察方向的投影。"],
+          practice: "圆 6 题、位置 4 题、观察物体 3 组。",
+          pass: "公式全对，长度与面积单位不混，位置三要素齐全。",
+          formulas: ["直径和半径", "圆的周长", "圆的面积", "确定位置表达"],
+          memory: "检查口令：半径还是直径？一圈还是面积？观测点是谁？"
+        },
+        {
+          day: "第 5 周 第 6 天",
+          title: "总复习三：百分数与数据",
+          outcome: "用百分数和统计数据解决比较、评价和综合实践问题。",
+          steps: ["闪卡复习常见分数小数百分数互化。", "完成 4 道百分率问题，逐题圈分母。", "读一张统计表，求总量、平均和相差。", "写一段有数据证据的结论。"],
+          practice: "互化 10 题、百分率 4 题、数据分析 1 组。",
+          pass: "互化至少对 8 题，百分率分母全对，结论引用数据准确。",
+          formulas: ["百分率通式", "求比较量", "已知比较量求单位 1", "平均数", "总量"],
+          memory: "复习主线：百分数比较的是两个量，数据结论必须说明依据。"
+        },
+        {
+          day: "第 5 周 第 7 天",
+          title: "全册过关与后续补弱",
+          outcome: "完成全册基础检测，形成下一阶段只针对真实薄弱点的清单。",
+          steps: ["先闭卷默写必背公式，再完成 40 分钟基础卷。", "按概念、读题、列式、计算、单位五类统计错题。", "每类写一个正确第一步和一道代表题。", "只选最影响后续学习的 3 个薄弱点排后续复习顺序。"],
+          practice: "全册基础卷 40 分钟，公式默写 10 分钟，错题复盘 30 分钟。",
+          pass: "基础卷达到 75%，核心公式默写达到 90%，能说出 3 个后续重点。",
+          formulas: ["分数除法", "圆的周长", "圆的面积", "求部分量", "已知部分求整体", "比、除法、分数的关系", "百分率通式", "平均数"],
+          memory: "最终要求：公式会默写，题型会识别，算完会检查。"
+        }
+      ]
+    };
 
     const weeks = [
       ["1", "诊断、分数基础、分数除法", "第 1-2 天诊断补弱；第 3-7 天完成分数除法。每天保留 20 分钟约分、通分、分数乘除。", "fraction-division"],
@@ -1460,6 +2164,42 @@
       }
     ];
 
+    const formulaGuide = {
+      "倒数": { level: "必背", memory: "分子分母交换位置；0 没有倒数。" },
+      "分数除法": { level: "必背", memory: "除变乘，除数倒；B 不能为 0。" },
+      "求一个数是另一个数的几分之几": { level: "必背", memory: "比较量 ÷ 单位 1，先找标准量。" },
+      "求部分量": { level: "必背", memory: "知道整体求部分，用单位 1 × 分率。" },
+      "已知部分求整体": { level: "必背", memory: "知道部分求整体，用部分量 ÷ 分率。" },
+      "多或少几分之几": { level: "必背", memory: "相差量 ÷ 标准量，标准量就是单位 1。" },
+      "直径和半径": { level: "必背", memory: "同圆中 d = 2r，r = d ÷ 2。" },
+      "圆的周长": { level: "必背", memory: "一圈长度看 C：πd 或 2πr。" },
+      "圆的面积": { level: "必背", memory: "面积看半径平方：πr²。" },
+      "半圆周长": { level: "会用", memory: "半个圆周还要加一条直径。" },
+      "半圆面积": { level: "会用", memory: "整圆面积除以 2。" },
+      "圆环面积": { level: "拓展", memory: "大圆面积减小圆面积。" },
+      "篮球得分规则": { level: "会用", memory: "先说每个字母代表什么，再代入。" },
+      "总价关系": { level: "必背", memory: "总价 = 单价 × 数量。" },
+      "路程关系": { level: "必背", memory: "路程 = 速度 × 时间。" },
+      "长方形周长与面积": { level: "必背", memory: "周长围一圈，面积算占地。" },
+      "比、除法、分数的关系": { level: "必背", memory: "a:b = a÷b = a/b，b 不为 0。" },
+      "比值": { level: "必背", memory: "比值 = 前项 ÷ 后项，结果是一个数。" },
+      "比的基本性质": { level: "必背", memory: "前后项同乘或同除不为 0 的数，比值不变。" },
+      "按比分配": { level: "必背", memory: "先求总份数，再按各自份数分总量。" },
+      "百分数意义": { level: "必背", memory: "比较量 ÷ 单位 1 × 100%。" },
+      "百分率通式": { level: "必背", memory: "符合条件的量 ÷ 总量 × 100%。" },
+      "求比较量": { level: "必背", memory: "知道整体求部分：单位 1 × 百分率。" },
+      "已知比较量求单位 1": { level: "必背", memory: "知道部分求整体：比较量 ÷ 百分率。" },
+      "多或少百分之几": { level: "必背", memory: "相差量 ÷ 标准量 × 100%。" },
+      "确定位置表达": { level: "必背", memory: "观测点、方向角、距离，三项缺一不可。" },
+      "平均数": { level: "必背", memory: "平均数 = 总数量 ÷ 总份数。" },
+      "相差量": { level: "会用", memory: "较大数 - 较小数。" },
+      "总量": { level: "会用", memory: "把各部分数量相加。" }
+    };
+
+    const formulasByName = new Map(
+      formulaGroups.flatMap((group) => group.formulas.map((formula) => [formula.name, formula]))
+    );
+
     const prompts = [
       "题目问的是什么？",
       "已知哪些量？",
@@ -1483,6 +2223,7 @@
 
     const defaultState = {
       activeUnit: "diagnosis",
+      activeLessons: {},
       checks: {},
       notes: "",
       flashIndex: 0,
@@ -1494,9 +2235,15 @@
 
     function loadState() {
       try {
-        return { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || "{}") };
+        const saved = JSON.parse(localStorage.getItem(stateKey) || "{}");
+        return {
+          ...defaultState,
+          ...saved,
+          activeLessons: { ...(saved.activeLessons || {}) },
+          checks: { ...(saved.checks || {}) }
+        };
       } catch {
-        return { ...defaultState };
+        return { ...defaultState, activeLessons: {}, checks: {} };
       }
     }
 
@@ -1523,6 +2270,41 @@
       if (className) node.className = className;
       if (text !== undefined) node.textContent = text;
       return node;
+    }
+
+    function formulaMeta(name) {
+      return formulaGuide[name] || { level: "会用", memory: "先说含义，再代入计算。" };
+    }
+
+    function formulaLevelClass(level) {
+      if (level === "必背") return "must";
+      if (level === "拓展") return "extend";
+      return "use";
+    }
+
+    function makeFormulaLevel(level) {
+      return el("span", `formula-level ${formulaLevelClass(level)}`, level);
+    }
+
+    function makeFormulaMini(name) {
+      const formula = formulasByName.get(name);
+      if (!formula) return null;
+      const meta = formulaMeta(name);
+      const row = el("div", "formula-mini");
+      const nameBlock = el("div", "formula-mini-name");
+      nameBlock.append(el("span", "", name), makeFormulaLevel(meta.level));
+      const copy = el("div");
+      copy.append(
+        el("div", "formula-mini-expression", formula.expression),
+        el("span", "formula-memory", `记忆提示：${meta.memory}`)
+      );
+      row.append(nameBlock, copy);
+      return row;
+    }
+
+    function lessonFormulaNames(unitId) {
+      const names = (lessonPlans[unitId] || []).flatMap((lesson) => lesson.formulas || []);
+      return [...new Set(names)];
     }
 
     function makeCheckItem(group, value, title, detail) {
@@ -1615,6 +2397,130 @@
       });
     }
 
+    function renderLearningRoute(unit) {
+      const lessons = lessonPlans[unit.id] || [];
+      const picker = document.getElementById("lessonPicker");
+      const stage = document.getElementById("lessonStage");
+      picker.innerHTML = "";
+      stage.innerHTML = "";
+
+      if (!lessons.length) {
+        document.getElementById("unitLessonCounter").textContent = "暂无分课安排";
+        stage.appendChild(el("p", "", "本单元暂未设置分课学习路线。"));
+        return;
+      }
+
+      if (!state.activeLessons || typeof state.activeLessons !== "object") state.activeLessons = {};
+      const savedIndex = Number(state.activeLessons[unit.id] || 0);
+      const activeIndex = Math.min(Math.max(savedIndex, 0), lessons.length - 1);
+      state.activeLessons[unit.id] = activeIndex;
+      const completed = lessons.filter((lesson) => isChecked("lesson", `${unit.id}:${lesson.day}`)).length;
+      document.getElementById("unitLessonCounter").textContent = `${completed}/${lessons.length} 课完成`;
+
+      lessons.forEach((lesson, index) => {
+        const button = el("button", "lesson-pick");
+        button.type = "button";
+        button.setAttribute("aria-pressed", String(index === activeIndex));
+        button.classList.toggle("active", index === activeIndex);
+        button.classList.toggle("done", isChecked("lesson", `${unit.id}:${lesson.day}`));
+        button.append(el("span", "", lesson.day), el("strong", "", lesson.title));
+        button.addEventListener("click", () => {
+          state.activeLessons[unit.id] = index;
+          saveState();
+          renderLearningRoute(unit);
+        });
+        picker.appendChild(button);
+      });
+
+      const lesson = lessons[activeIndex];
+      const head = el("div", "lesson-stage-head");
+      const titleWrap = el("div");
+      titleWrap.append(el("span", "lesson-day", lesson.day), el("h3", "", lesson.title));
+      head.append(titleWrap, el("span", "lesson-counter", `第 ${activeIndex + 1} 课`));
+
+      const outcome = el("div", "lesson-outcome");
+      outcome.append(el("b", "", "本课要学会"), el("span", "", lesson.outcome));
+
+      const stepsTitle = el("h3", "", "照着这 4 步学");
+      const steps = el("ol", "learn-steps");
+      lesson.steps.forEach((step) => steps.appendChild(el("li", "learn-step", step)));
+
+      const details = el("div", "lesson-detail-grid");
+      const practice = el("div", "lesson-detail");
+      practice.append(el("b", "", "当堂练"), el("span", "", lesson.practice));
+      const pass = el("div", "lesson-detail");
+      pass.append(el("b", "", "怎样算学会"), el("span", "", lesson.pass));
+      details.append(practice, pass);
+
+      const formulaBlock = el("div", "lesson-formulas");
+      formulaBlock.appendChild(el("h3", "", lesson.formulas.length ? "本课对应公式" : "本课必记方法"));
+      lesson.formulas.forEach((name) => {
+        const row = makeFormulaMini(name);
+        if (row) formulaBlock.appendChild(row);
+      });
+      formulaBlock.appendChild(el("p", "formula-memory", `本课口令：${lesson.memory}`));
+
+      const footer = el("div", "lesson-footer");
+      const check = makeCheckItem("lesson", `${unit.id}:${lesson.day}`, "本课已完成", lesson.pass);
+      const checkInput = check.querySelector("input");
+      checkInput.addEventListener("change", () => renderLearningRoute(unit));
+      const checkList = el("ul", "lesson-list");
+      checkList.appendChild(check);
+      const actions = el("div", "actions");
+      const previous = el("button", "text-button", "上一课");
+      previous.type = "button";
+      previous.disabled = activeIndex === 0;
+      previous.addEventListener("click", () => {
+        state.activeLessons[unit.id] = Math.max(0, activeIndex - 1);
+        saveState();
+        renderLearningRoute(unit);
+      });
+      const next = el("button", "text-button primary", "下一课");
+      next.type = "button";
+      next.disabled = activeIndex === lessons.length - 1;
+      next.addEventListener("click", () => {
+        state.activeLessons[unit.id] = Math.min(lessons.length - 1, activeIndex + 1);
+        saveState();
+        renderLearningRoute(unit);
+      });
+      actions.append(previous, next);
+      footer.append(checkList, actions);
+
+      stage.append(head, outcome, stepsTitle, steps, details, formulaBlock, footer);
+    }
+
+    function renderUnitFormulaSummary(unit) {
+      const root = document.getElementById("unitFormulaSummary");
+      root.innerHTML = "";
+      const names = lessonFormulaNames(unit.id);
+
+      if (!names.length) {
+        const item = el("div", "formula-guide-item");
+        item.append(el("h4", "", "本单元无新增计算公式"));
+        (lessonPlans[unit.id] || []).forEach((lesson) => {
+          item.appendChild(el("p", "", `${lesson.title}：${lesson.memory}`));
+        });
+        root.appendChild(item);
+        return;
+      }
+
+      names.forEach((name) => {
+        const formula = formulasByName.get(name);
+        if (!formula) return;
+        const meta = formulaMeta(name);
+        const item = el("div", "formula-guide-item");
+        const title = el("h4");
+        title.append(el("span", "", name), makeFormulaLevel(meta.level));
+        item.append(
+          title,
+          el("div", "formula-mini-expression", formula.expression),
+          el("p", "", `记忆提示：${meta.memory}`),
+          el("p", "", `什么时候用：${formula.note}`)
+        );
+        root.appendChild(item);
+      });
+    }
+
     function renderActiveUnit() {
       const unit = units.find((item) => item.id === state.activeUnit) || units[0];
       document.getElementById("unitSelect").value = unit.id;
@@ -1634,6 +2540,8 @@
       fillList("unitGoals", unit.goals);
       fillList("unitSupport", unit.support);
       fillList("unitMistakes", unit.mistakes);
+      renderLearningRoute(unit);
+      renderUnitFormulaSummary(unit);
 
       const tasks = document.getElementById("unitTasks");
       tasks.innerHTML = "";
@@ -1671,6 +2579,31 @@
     function renderFormulas() {
       const root = document.getElementById("formulaModule");
       root.innerHTML = "";
+
+      const mustSummary = el("div", "surface must-summary");
+      const mustHeader = el("div", "surface-header");
+      mustHeader.appendChild(el("h3", "", "必背公式总表"));
+      const mustBody = el("div", "surface-body");
+      const mustGrid = el("div", "formula-guide");
+      formulaGroups.forEach((group) => {
+        group.formulas.forEach((formula) => {
+          const meta = formulaMeta(formula.name);
+          if (meta.level !== "必背") return;
+          const item = el("div", "formula-guide-item");
+          const title = el("h4");
+          title.append(el("span", "", formula.name), makeFormulaLevel(meta.level));
+          item.append(
+            title,
+            el("div", "formula-mini-expression", formula.expression),
+            el("p", "", `背诵提示：${meta.memory}`)
+          );
+          mustGrid.appendChild(item);
+        });
+      });
+      mustBody.appendChild(mustGrid);
+      mustSummary.append(mustHeader, mustBody);
+      root.appendChild(mustSummary);
+
       formulaGroups.forEach((group) => {
         const section = el("div", "surface");
         section.style.marginBottom = "18px";
@@ -1681,9 +2614,12 @@
 
         group.formulas.forEach((formula) => {
           const value = `${group.group}:${formula.name}`;
+          const meta = formulaMeta(formula.name);
           const card = el("article", "formula-card");
           const top = el("div", "formula-top");
           const title = el("h3", "", formula.name);
+          const titleGroup = el("div");
+          titleGroup.append(title, makeFormulaLevel(meta.level));
           const checkbox = document.createElement("input");
           checkbox.type = "checkbox";
           checkbox.title = "已掌握";
@@ -1693,7 +2629,7 @@
             setChecked("formula", value, checkbox.checked);
             card.classList.toggle("mastered", checkbox.checked);
           });
-          top.append(title, checkbox);
+          top.append(titleGroup, checkbox);
 
           const expression = el("div", "formula-expression", formula.expression);
           const note = el("div", "formula-note");
@@ -1701,7 +2637,9 @@
           meaning.innerHTML = `<b>含义：</b>${formula.note}`;
           const example = el("span");
           example.innerHTML = `<b>例子：</b>${formula.example}`;
-          note.append(meaning, example);
+          const memory = el("span");
+          memory.innerHTML = `<b>背诵提示：</b>${meta.memory}`;
+          note.append(meaning, example, memory);
 
           card.append(top, expression, note);
           grid.appendChild(card);
@@ -1751,7 +2689,8 @@
         diagnosisMeaning.length +
         weeks.length +
         formulaGroups.reduce((sum, group) => sum + group.formulas.length, 0) +
-        units.reduce((sum, unit) => sum + unit.tasks.length, 0);
+        units.reduce((sum, unit) => sum + unit.tasks.length, 0) +
+        Object.values(lessonPlans).reduce((sum, lessons) => sum + lessons.length, 0);
       const done = Object.entries(state.checks).filter(([, checked]) => checked).length;
       const percent = total ? Math.round((done / total) * 100) : 0;
       document.getElementById("progressText").textContent = `${percent}%`;
@@ -1783,7 +2722,7 @@
       document.getElementById("printBtn").addEventListener("click", () => window.print());
       document.getElementById("resetBtn").addEventListener("click", () => {
         if (!confirm("确认清空所有勾选和记录？")) return;
-        state = { ...defaultState, checks: {}, notes: "" };
+        state = { ...defaultState, activeLessons: {}, checks: {}, notes: "" };
         saveState();
         init();
         showToast("已清空进度");
