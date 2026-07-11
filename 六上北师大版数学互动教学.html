@@ -807,6 +807,111 @@
       margin-bottom: 4px;
     }
 
+    .exercise-block {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .exercise-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .exercise-head h3 {
+      margin: 0;
+    }
+
+    .exercise-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .exercise-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .exercise-item:last-child {
+      border-bottom: 0;
+    }
+
+    .exercise-item.correct .exercise-prompt {
+      color: #405044;
+    }
+
+    .exercise-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .exercise-source {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .exercise-number {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .exercise-prompt {
+      margin: 8px 0 10px;
+      font-size: 16px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .exercise-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .exercise-actions .text-button {
+      min-height: 32px;
+      padding: 5px 10px;
+    }
+
+    .exercise-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .exercise-check input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+    }
+
+    .exercise-reveal {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 11px;
+      border-left: 4px solid var(--blue);
+      background: var(--soft-blue);
+      color: #28506b;
+    }
+
+    .exercise-reveal.show {
+      display: block;
+    }
+
     .lesson-formulas {
       display: grid;
       gap: 9px;
@@ -987,6 +1092,11 @@
 
       .actions {
         justify-content: start;
+      }
+
+      .exercise-check {
+        width: 100%;
+        margin-left: 0;
       }
 
       .metric-row,
@@ -1917,6 +2027,185 @@
       ]
     };
 
+    const lessonQuestions = {
+      "第 1 周 第 1 天": [
+        { source: "教材第 108-109 页同类题", prompt: "计算：3/4 + 1/6。", hint: "先通分成分母 12。", answer: "11/12。" },
+        { source: "教材第 109 页同类题", prompt: "计算：5/6 × 9/10。", hint: "先把 5 和 10、9 和 6 约分。", answer: "3/4。" },
+        { source: "教材总复习单位题改编", prompt: "2.5 米等于多少厘米？", hint: "1 米 = 100 厘米。", answer: "250 厘米。" }
+      ],
+      "第 1 周 第 2 天": [
+        { source: "教材第 2 页情境改编", prompt: "画一个长方形，把它平均分成 4 份，涂出其中的 3 份。涂色部分表示几分之几？", hint: "分母看总份数，分子看涂色份数。", answer: "3/4。" },
+        { source: "教材第 49 页关系题改编", prompt: "把 12 个圆片平均分成 3 份，其中 1 份有几个？也就是 12 的几分之几？", hint: "先算 12 ÷ 3。", answer: "4 个，也就是 12 的 1/3。" },
+        { source: "教材第 49 页同类题", prompt: "8 是 12 的几分之几？先写比较关系再约分。", hint: "用 8 ÷ 12。", answer: "8/12 = 2/3。" }
+      ],
+      "第 1 周 第 3 天": [
+        { source: "教材第 2 页原情境", prompt: "把一张纸的 4/5 平均分成 2 份，每份是这张纸的几分之几？", hint: "4/5 ÷ 2 = 4/5 × 1/2。", answer: "2/5。" },
+        { source: "教材第 3 页练一练改编", prompt: "计算：3/4 ÷ 3。", hint: "除以 3 就乘 1/3。", answer: "1/4。" },
+        { source: "教材第 3 页同类题", prompt: "计算：5/6 ÷ 5。", hint: "先改写成 5/6 × 1/5，再约分。", answer: "1/6。" }
+      ],
+      "第 1 周 第 4 天": [
+        { source: "教材第 4-5 页同类题", prompt: "4 里面有几个 1/2？列式计算。", hint: "求包含几个，用 4 ÷ 1/2。", answer: "8 个。" },
+        { source: "教材第 5 页试一试改编", prompt: "计算：3 ÷ 3/4。", hint: "3 × 4/3，先约分。", answer: "4。" },
+        { source: "教材第 5 页同类题", prompt: "计算：5 ÷ 2/3。", hint: "只把除数 2/3 倒过来。", answer: "15/2，也就是 7.5。" }
+      ],
+      "第 1 周 第 5 天": [
+        { source: "教材第 6 页练一练改编", prompt: "计算：3/4 ÷ 2/5。", hint: "改成 3/4 × 5/2。", answer: "15/8，也就是 1 又 7/8。" },
+        { source: "教材第 6 页同类题", prompt: "计算：7/9 ÷ 14/15。", hint: "先变乘倒数，再交叉约分。", answer: "5/6。" },
+        { source: "教材第 6 页同类题", prompt: "计算：5/6 ÷ 10/9。", hint: "5/6 × 9/10。", answer: "3/4。" }
+      ],
+      "第 1 周 第 6 天": [
+        { source: "教材第 7-8 页情境改编", prompt: "有 3/4 升果汁，每杯装 1/8 升，可以装几杯？", hint: "求 3/4 里面有几个 1/8。", answer: "3/4 ÷ 1/8 = 6 杯。" },
+        { source: "教材第 7 页跑步情境改编", prompt: "小明 1/3 小时走了 5/6 千米，照这个速度，1 小时走多少千米？", hint: "路程 ÷ 时间 = 速度。", answer: "5/6 ÷ 1/3 = 5/2 千米，也就是 2.5 千米。" },
+        { source: "教材第 9 页同类题", prompt: "8 人是 12 人的几分之几？", hint: "比较量 ÷ 标准量。", answer: "8 ÷ 12 = 2/3。" }
+      ],
+      "第 1 周 第 7 天": [
+        { source: "教材第 9-10 页整理与复习", prompt: "计算：7/10 ÷ 14/15。", hint: "先变成 7/10 × 15/14。", answer: "3/4。" },
+        { source: "教材第 10 页同类题", prompt: "计算：9 ÷ 3/5。", hint: "9 × 5/3。", answer: "15。" },
+        { source: "教材第 10 页应用题改编", prompt: "把 2/3 千克糖每 1/9 千克装一袋，可以装几袋？", hint: "用总量 ÷ 每袋质量。", answer: "2/3 ÷ 1/9 = 6 袋。" }
+      ],
+      "第 2 周 第 1 天": [
+        { source: "教材第 11-14 页同类题", prompt: "一个圆的半径是 3 厘米，直径是多少厘米？", hint: "d = 2r。", answer: "6 厘米。" },
+        { source: "教材第 14 页练一练改编", prompt: "一个圆的直径是 10 厘米，半径是多少厘米？", hint: "r = d ÷ 2。", answer: "5 厘米。" },
+        { source: "教材第 13 页画圆活动", prompt: "用圆规画半径 4 厘米的圆，这个圆的直径是多少厘米？", hint: "圆规两脚间距离就是半径。", answer: "8 厘米。" }
+      ],
+      "第 2 周 第 2 天": [
+        { source: "教材第 21-23 页同类题", prompt: "圆的直径是 8 厘米，周长是多少厘米？π 取 3.14。", hint: "C = πd。", answer: "3.14 × 8 = 25.12 厘米。" },
+        { source: "教材第 22 页试一试改编", prompt: "圆的半径是 5 厘米，周长是多少厘米？", hint: "C = 2πr。", answer: "31.4 厘米。" },
+        { source: "教材第 23 页半圆题改编", prompt: "半圆的半径是 4 厘米，它的周长是多少厘米？", hint: "半圆周长 = 半个圆周 + 直径。", answer: "3.14 × 4 + 8 = 20.56 厘米。" }
+      ],
+      "第 2 周 第 3 天": [
+        { source: "教材第 26-28 页同类题", prompt: "圆的半径是 3 厘米，面积是多少平方厘米？", hint: "S = πr²。", answer: "3.14 × 3² = 28.26 平方厘米。" },
+        { source: "教材第 28-29 页同类题", prompt: "圆的直径是 10 厘米，面积是多少平方厘米？", hint: "先求半径 5 厘米。", answer: "3.14 × 5² = 78.5 平方厘米。" },
+        { source: "教材第 31-32 页圆环题改编", prompt: "圆环的大圆半径是 5 厘米，小圆半径是 3 厘米，面积是多少？", hint: "π(R²-r²)。", answer: "3.14 × (25-9) = 50.24 平方厘米。" }
+      ],
+      "第 2 周 第 4 天": [
+        { source: "教材第 33-34 页篮球情境", prompt: "投中 a 个 2 分球，又罚中 b 个球，每个罚球得 1 分，总得分怎样表示？", hint: "2 分球得分加罚球得分。", answer: "2a + b。" },
+        { source: "教材第 35-37 页同类题", prompt: "每本练习册 x 元，买 5 本，总价怎样表示？", hint: "总价 = 单价 × 数量。", answer: "5x 元。" },
+        { source: "教材第 38-40 页同类题", prompt: "每分钟行 80 米，行 t 分钟，路程怎样表示？", hint: "路程 = 速度 × 时间。", answer: "80t 米。" }
+      ],
+      "第 2 周 第 5 天": [
+        { source: "教材第 44-45 页用水调查改编", prompt: "刷牙一次用水 3 升，每天刷牙 2 次，一天用水多少升？", hint: "每次用量 × 次数。", answer: "6 升。" },
+        { source: "教材第 45-46 页节水实验改编", prompt: "每次洗手少用 1.5 升水，一天洗 4 次手，一天节约多少升？", hint: "每次节约量 × 次数。", answer: "6 升。" },
+        { source: "教材第 47-48 页方案改编", prompt: "某家庭原来一周用水 42 吨，改进后用水 30 吨，一周节约多少吨？", hint: "原用量 - 现用量。", answer: "12 吨。" }
+      ],
+      "第 2 周 第 6 天": [
+        { source: "教材第 21-29 页综合题", prompt: "圆的直径是 12 厘米，周长是多少厘米？", hint: "C = πd。", answer: "37.68 厘米。" },
+        { source: "教材第 26-29 页综合题", prompt: "圆的半径是 4 厘米，面积是多少平方厘米？", hint: "4² = 16。", answer: "50.24 平方厘米。" },
+        { source: "教材第 33-40 页字母题", prompt: "每盒彩笔 a 元，买 8 盒，总价怎样表示？当 a=6 时总价是多少？", hint: "先写 8a，再代入。", answer: "8a 元；当 a=6 时是 48 元。" }
+      ],
+      "第 2 周 第 7 天": [
+        { source: "教材第 29-32 页同类题", prompt: "半圆的直径是 10 厘米，周长是多少厘米？", hint: "半径是 5 厘米，再算 πr+d。", answer: "25.7 厘米。" },
+        { source: "教材第 28 页同类题", prompt: "圆的半径是 6 厘米，面积是多少平方厘米？", hint: "S = 3.14 × 6²。", answer: "113.04 平方厘米。" },
+        { source: "教材第 33 页篮球题改编", prompt: "表达式 2a+b 中，a=4，b=3，结果是多少？", hint: "先算 2×4。", answer: "11。" }
+      ],
+      "第 3 周 第 1 天": [
+        { source: "教材第 49-51 页同类题", prompt: "60 人的 3/5 是多少人？", hint: "求部分量，用整体 × 分率。", answer: "36 人。" },
+        { source: "教材第 51 页练一练改编", prompt: "48 千克的 7/8 是多少千克？", hint: "48 × 7/8。", answer: "42 千克。" },
+        { source: "教材第 49-51 页同类题", prompt: "75 米的 2/3 是多少米？", hint: "先用 75 ÷ 3。", answer: "50 米。" }
+      ],
+      "第 3 周 第 2 天": [
+        { source: "教材第 52-53 页同类题", prompt: "一个数的 3/5 是 24，这个数是多少？", hint: "部分量 ÷ 分率。", answer: "24 ÷ 3/5 = 40。" },
+        { source: "教材第 52 页窗户情境改编", prompt: "一块玻璃面积的 7/10 是 35 平方分米，整块玻璃面积是多少？", hint: "35 ÷ 7/10。", answer: "50 平方分米。" },
+        { source: "教材第 53 页同类题", prompt: "18 人占全班的 3/4，全班有多少人？", hint: "已知部分求整体。", answer: "24 人。" }
+      ],
+      "第 3 周 第 3 天": [
+        { source: "教材第 54-55 页同类题", prompt: "乙有 40 本书，甲比乙多 1/5，甲有多少本？", hint: "先求乙的 1/5。", answer: "40 + 40×1/5 = 48 本。" },
+        { source: "教材第 54 页同类题", prompt: "甲有 36 张卡片，是乙的 3/4，乙有多少张？", hint: "已知部分求整体。", answer: "36 ÷ 3/4 = 48 张。" },
+        { source: "教材第 55-56 页两步题改编", prompt: "一条路长 120 米，第一天修 2/5，第二天修剩下的 1/3，两天共修多少米？", hint: "第一天后还剩 3/5。", answer: "48 + 24 = 72 米。" }
+      ],
+      "第 3 周 第 4 天": [
+        { source: "教材第 55-56 页复习题", prompt: "45 本科技书占图书总数的 3/5，图书共有多少本？", hint: "45 ÷ 3/5。", answer: "75 本。" },
+        { source: "教材第 49-51 页复习题", prompt: "六年级有 80 人，男生占 3/8，女生有多少人？", hint: "先求男生人数，再用总数减。", answer: "男生 30 人，女生 50 人。" },
+        { source: "教材第 55 页两步题改编", prompt: "有 60 千克水果，先卖出 1/4，再卖出剩下的 1/3，还剩多少千克？", hint: "第一次后剩 45 千克。", answer: "还剩 30 千克。" }
+      ],
+      "第 3 周 第 5 天": [
+        { source: "教材第 57-59 页同类题", prompt: "有 6 个红球和 4 个蓝球，红球与蓝球的最简整数比是多少？", hint: "先写 6:4，再同时除以 2。", answer: "3:2。" },
+        { source: "教材第 57 页生活中的比", prompt: "把 12:18 写成最简整数比。", hint: "前后项同时除以 6。", answer: "2:3。" },
+        { source: "教材第 59 页同类题", prompt: "比 8:5 的比值是多少？", hint: "前项 ÷ 后项。", answer: "8/5，也就是 1.6。" }
+      ],
+      "第 3 周 第 6 天": [
+        { source: "教材第 61-63 页同类题", prompt: "化简比：0.7:0.8。", hint: "前后项同时乘 10。", answer: "7:8。" },
+        { source: "教材第 62-63 页分数比", prompt: "化简比：3/4:1/2。", hint: "前后项同时乘 4。", answer: "3:2。" },
+        { source: "教材第 63 页练一练改编", prompt: "化简比：12:18。", hint: "求 12 和 18 的最大公因数。", answer: "2:3。" }
+      ],
+      "第 3 周 第 7 天": [
+        { source: "教材第 64-66 页按比分配", prompt: "把 60 按 2:3 分成两部分，两部分各是多少？", hint: "共 5 份。", answer: "24 和 36。" },
+        { source: "教材第 64 页同类题", prompt: "把 96 按 5:3 分配，两部分各是多少？", hint: "每份是 96 ÷ 8。", answer: "60 和 36。" },
+        { source: "教材第 65-66 页调制题改编", prompt: "面粉和水按 4:1 配成 750 克面团，需要面粉和水各多少克？", hint: "总份数是 5。", answer: "面粉 600 克，水 150 克。" }
+      ],
+      "第 4 周 第 1 天": [
+        { source: "教材第 67-70 页象群迁徙情境", prompt: "以指挥部为观测点，象群在北偏东 30° 方向，距离 600 米。请用完整句子描述位置。", hint: "说齐观测点、方向角、距离。", answer: "象群在指挥部北偏东 30° 方向 600 米处。" },
+        { source: "教材第 68-70 页作图题改编", prompt: "图上 1 厘米表示 200 米，A 点到 B 点图上距离 3.5 厘米，实际距离是多少？", hint: "3.5 × 200。", answer: "700 米。" },
+        { source: "教材第 71-72 页相对位置", prompt: "A 在 B 的南偏西 40° 方向 800 米处，B 在 A 的什么方向、距离多少？", hint: "反方向角度不变。", answer: "B 在 A 的北偏东 40° 方向 800 米处。" }
+      ],
+      "第 4 周 第 2 天": [
+        { source: "教材第 73-74 页五子棋棋局改编", prompt: "对方在同一横线上连续落了 4 子，两端都空着。你至少要先做什么？", hint: "如果不挡，对方下一步就可能连成五子。", answer: "先堵住其中一个空端，阻止对方下一步获胜。" },
+        { source: "教材第 74 页策略题改编", prompt: "己方有一条两端都空着的连续 3 子，下一步优先考虑什么位置？", hint: "让连续棋子变成两端有威胁的 4 子。", answer: "在任一空端延长，争取形成活四或双向威胁。" },
+        { source: "教材附页 4 棋盘改编", prompt: "一条斜线上已有 4 子，两个端点都空着。怎样判断两个可落子点？", hint: "沿同一条斜线向两端各延伸一格。", answer: "四子斜线两端相邻的两个空格都是可连成五子的点。" }
+      ],
+      "第 4 周 第 3 天": [
+        { source: "教材第 75 页罚点球情境", prompt: "罚球 20 个，进 18 个，命中率是多少？", hint: "18 ÷ 20，再化成百分数。", answer: "90%。" },
+        { source: "教材第 75 页表格题", prompt: "罚球 10 个，进 8 个，命中率是多少？", hint: "8/10 化成分母 100。", answer: "80%。" },
+        { source: "教材第 75 页同类数据", prompt: "投篮 25 次，进 21 次，命中率是多少？", hint: "21 ÷ 25。", answer: "84%。" }
+      ],
+      "第 4 周 第 4 天": [
+        { source: "教材第 76-78 页互化题", prompt: "把 0.625 化成百分数。", hint: "小数乘 100%，小数点向右移两位。", answer: "62.5%。" },
+        { source: "教材第 78 页同类题", prompt: "把 3/5 化成百分数。", hint: "3 ÷ 5 = 0.6。", answer: "60%。" },
+        { source: "教材第 76-78 页同类题", prompt: "把 125% 化成小数和最简分数。", hint: "125% = 1.25。", answer: "1.25，最简分数是 5/4。" }
+      ],
+      "第 4 周 第 5 天": [
+        { source: "教材第 77 页合格率情境", prompt: "30 件产品中有 24 件合格，合格率是多少？", hint: "合格数 ÷ 总数。", answer: "80%。" },
+        { source: "教材第 78 页同类题", prompt: "50 道题做对 48 道，正确率是多少？", hint: "48 ÷ 50。", answer: "96%。" },
+        { source: "教材第 79-80 页同类题", prompt: "40 人中有 38 人出勤，出勤率是多少？", hint: "38 ÷ 40。", answer: "95%。" }
+      ],
+      "第 4 周 第 6 天": [
+        { source: "教材第 81-83 页同类题", prompt: "200 的 15% 是多少？", hint: "整体 × 百分率。", answer: "30。" },
+        { source: "教材第 81-83 页同类题", prompt: "45 是一个数的 75%，这个数是多少？", hint: "部分 ÷ 百分率。", answer: "60。" },
+        { source: "教材第 84-85 页增减题改编", prompt: "原价 80 元，现价 100 元，现价比原价增加百分之几？", hint: "先求相差 20 元，再除以原价。", answer: "25%。" }
+      ],
+      "第 4 周 第 7 天": [
+        { source: "教材第 84 页复习题", prompt: "把 3/8 化成百分数。", hint: "3 ÷ 8 = 0.375。", answer: "37.5%。" },
+        { source: "教材第 78-80 页同类题", prompt: "60 题做对 42 题，正确率是多少？", hint: "42 ÷ 60。", answer: "70%。" },
+        { source: "教材第 84-85 页同类题", prompt: "原有 240 人，减少 15% 后还有多少人？", hint: "求剩下的 85%。", answer: "240 × 85% = 204 人。" }
+      ],
+      "第 5 周 第 1 天": [
+        { source: "教材第 86-87 页有趣的投影", prompt: "一个直立的圆柱，从上面看和从正面看分别是什么形状？", hint: "想象杯子或罐头盒。", answer: "从上面看是圆，从正面看通常是长方形。" },
+        { source: "教材第 86-87 页同类题", prompt: "一个直立的圆锥，从上面看和从正面看分别是什么形状？", hint: "想象生日帽。", answer: "从上面看是圆，从正面看是三角形。" },
+        { source: "教材第 88-90 页搭积木", prompt: "4 个相同小正方体排成一行，从上面看会看到几个正方形？", hint: "每个小正方体的上面都没有被遮住。", answer: "4 个正方形。" }
+      ],
+      "第 5 周 第 2 天": [
+        { source: "教材第 91-94 页同类数据", prompt: "三天运动时间分别是 40、50、60 分钟，平均每天多少分钟？", hint: "先求总量，再除以 3。", answer: "50 分钟。" },
+        { source: "教材第 95-99 页同类题", prompt: "四次成绩是 78、85、92、85，平均成绩是多少？", hint: "总分 340，再除以 4。", answer: "85 分。" },
+        { source: "教材第 91-94 页比较题", prompt: "一组数据最大值 65，最小值 42，相差多少？", hint: "较大数 - 较小数。", answer: "23。" }
+      ],
+      "第 5 周 第 3 天": [
+        { source: "教材第 103-105 页一日三餐改编", prompt: "主食 140 克、蔬菜 150 克、鸡翅 50 克、水果 100 克，总质量是多少？", hint: "把四类质量相加。", answer: "440 克。" },
+        { source: "教材第 103-105 页食谱分析", prompt: "一餐食物总量 500 克，其中蔬菜 150 克，蔬菜占总量的百分之几？", hint: "150 ÷ 500。", answer: "30%。" },
+        { source: "教材第 106-107 页优化食谱改编", prompt: "原食谱共 600 克，减少油炸食品 80 克，增加蔬菜 50 克，调整后共多少克？", hint: "600 - 80 + 50。", answer: "570 克。" }
+      ],
+      "第 5 周 第 4 天": [
+        { source: "教材第 108-110 页总复习", prompt: "计算：3/4 ÷ 5/8。", hint: "3/4 × 8/5。", answer: "6/5，也就是 1 又 1/5。" },
+        { source: "教材第 108-110 页同类题", prompt: "48 的 5/6 是多少？", hint: "48 × 5/6。", answer: "40。" },
+        { source: "教材第 110 页按比分配改编", prompt: "把 84 按 2:5 分配，两部分各是多少？", hint: "每份是 84 ÷ 7。", answer: "24 和 60。" }
+      ],
+      "第 5 周 第 5 天": [
+        { source: "教材第 111-112 页图形复习", prompt: "圆的直径是 14 厘米，周长是多少厘米？", hint: "C = πd。", answer: "43.96 厘米。" },
+        { source: "教材第 111 页同类题", prompt: "圆的半径是 5 厘米，面积是多少平方厘米？", hint: "S = πr²。", answer: "78.5 平方厘米。" },
+        { source: "教材第 112 页位置题改编", prompt: "学校在公园东偏北 25° 方向 500 米处，公园在学校什么方向？", hint: "反方向角度不变。", answer: "公园在学校西偏南 25° 方向 500 米处。" }
+      ],
+      "第 5 周 第 6 天": [
+        { source: "教材第 113-114 页统计复习", prompt: "把 0.35 写成百分数和最简分数。", hint: "0.35 = 35/100。", answer: "35%，最简分数是 7/20。" },
+        { source: "教材第 113 页同类题", prompt: "50 题做对 45 题，正确率是多少？", hint: "45 ÷ 50。", answer: "90%。" },
+        { source: "教材第 113-114 页数据题", prompt: "三组数据是 12、15、18，平均数是多少？", hint: "总和 45，再除以 3。", answer: "15。" }
+      ],
+      "第 5 周 第 7 天": [
+        { source: "教材第 108-115 页综合复习", prompt: "计算：5/6 ÷ 10/9。", hint: "除变乘，除数倒。", answer: "3/4。" },
+        { source: "教材第 111-112 页图形题", prompt: "圆的直径是 8 厘米，面积是多少平方厘米？", hint: "先求半径 4 厘米。", answer: "50.24 平方厘米。" },
+        { source: "教材第 113-114 页综合题", prompt: "36 人占总人数的 60%，总人数是多少？", hint: "部分 ÷ 百分率。", answer: "60 人。" },
+        { source: "教材第 110 页比的复习", prompt: "把 72 按 1:3 分配，两部分各是多少？", hint: "共 4 份。", answer: "18 和 54。" }
+      ]
+    };
+
     const weeks = [
       ["1", "诊断、分数基础、分数除法", "第 1-2 天诊断补弱；第 3-7 天完成分数除法。每天保留 20 分钟约分、通分、分数乘除。", "fraction-division"],
       ["2", "圆、字母表示、节水实践", "第 1-3 天圆；第 4 天字母表示；第 5 天节水实践；第 6-7 天综合补漏。", "circle"],
@@ -2307,6 +2596,81 @@
       return [...new Set(names)];
     }
 
+    function renderLessonQuestions(lesson) {
+      const questions = lessonQuestions[lesson.day] || [];
+      const block = el("section", "exercise-block");
+      const head = el("div", "exercise-head");
+      const title = el("h3", "", "教材题卡");
+      const counter = el("span", "lesson-counter");
+      head.append(title, counter);
+      const list = el("ol", "exercise-list");
+
+      function updateCounter() {
+        const done = questions.filter((question, index) => isChecked("question", `${lesson.day}:${index}`)).length;
+        counter.textContent = `${done}/${questions.length} 题做对`;
+      }
+
+      questions.forEach((question, index) => {
+        const value = `${lesson.day}:${index}`;
+        const item = el("li", "exercise-item");
+        const meta = el("div", "exercise-meta");
+        meta.append(
+          el("span", "exercise-source", question.source),
+          el("span", "exercise-number", `第 ${index + 1} 题`)
+        );
+        const prompt = el("p", "exercise-prompt", question.prompt);
+        const actions = el("div", "exercise-actions");
+        const hintButton = el("button", "text-button", "提示");
+        hintButton.type = "button";
+        hintButton.setAttribute("aria-expanded", "false");
+        const answerButton = el("button", "text-button", "查看答案");
+        answerButton.type = "button";
+        answerButton.setAttribute("aria-expanded", "false");
+        const reveal = el("div", "exercise-reveal");
+        reveal.setAttribute("aria-live", "polite");
+        let revealMode = "";
+
+        function showReveal(mode) {
+          revealMode = revealMode === mode ? "" : mode;
+          reveal.classList.toggle("show", Boolean(revealMode));
+          reveal.textContent = revealMode === "hint"
+            ? `提示：${question.hint}`
+            : revealMode === "answer"
+              ? `参考答案：${question.answer}`
+              : "";
+          hintButton.textContent = revealMode === "hint" ? "收起提示" : "提示";
+          answerButton.textContent = revealMode === "answer" ? "隐藏答案" : "查看答案";
+          hintButton.setAttribute("aria-expanded", String(revealMode === "hint"));
+          answerButton.setAttribute("aria-expanded", String(revealMode === "answer"));
+        }
+
+        hintButton.addEventListener("click", () => showReveal("hint"));
+        answerButton.addEventListener("click", () => showReveal("answer"));
+
+        const inputId = `question-${lesson.day.replace(/\s+/g, "-")}-${index}`;
+        const check = el("label", "exercise-check");
+        check.htmlFor = inputId;
+        const input = document.createElement("input");
+        input.id = inputId;
+        input.type = "checkbox";
+        input.checked = isChecked("question", value);
+        item.classList.toggle("correct", input.checked);
+        input.addEventListener("change", () => {
+          setChecked("question", value, input.checked);
+          item.classList.toggle("correct", input.checked);
+          updateCounter();
+        });
+        check.append(input, el("span", "", "做对了"));
+        actions.append(hintButton, answerButton, check);
+        item.append(meta, prompt, actions, reveal);
+        list.appendChild(item);
+      });
+
+      updateCounter();
+      block.append(head, list);
+      return block;
+    }
+
     function makeCheckItem(group, value, title, detail) {
       const li = el("li", "check-item");
       const input = document.createElement("input");
@@ -2486,7 +2850,7 @@
       actions.append(previous, next);
       footer.append(checkList, actions);
 
-      stage.append(head, outcome, stepsTitle, steps, details, formulaBlock, footer);
+      stage.append(head, outcome, stepsTitle, steps, details, renderLessonQuestions(lesson), formulaBlock, footer);
     }
 
     function renderUnitFormulaSummary(unit) {
@@ -2690,7 +3054,8 @@
         weeks.length +
         formulaGroups.reduce((sum, group) => sum + group.formulas.length, 0) +
         units.reduce((sum, unit) => sum + unit.tasks.length, 0) +
-        Object.values(lessonPlans).reduce((sum, lessons) => sum + lessons.length, 0);
+        Object.values(lessonPlans).reduce((sum, lessons) => sum + lessons.length, 0) +
+        Object.values(lessonQuestions).reduce((sum, questions) => sum + questions.length, 0);
       const done = Object.entries(state.checks).filter(([, checked]) => checked).length;
       const percent = total ? Math.round((done / total) * 100) : 0;
       document.getElementById("progressText").textContent = `${percent}%`;
